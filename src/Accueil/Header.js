@@ -1,50 +1,54 @@
-import React from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
+import React from "react";
 import './header.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 
-
-export default function Header() {
+export default function Header () {
     return (
       <Router>
-        <Links />
+        <Link className="header-nav_link general" to="/general">
+            Général
+        </Link>
+        <Link className="header-nav_link business" to="/business">
+            Economie
+        </Link>
+        <Link className="header-nav_link health" to="/health">
+            Santé
+        </Link>
+        <Link className="header-nav_link sports" to="/sports">
+            Sports
+        </Link>
+        <Link className="header-nav_link entertainment" to="/entertainment">
+            People
+        </Link>
+        <Link className="header-nav_link science" to="/science">
+            Science
+        </Link>
+        <Link className="header-nav_link technology" to="/technology">
+            Technologie
+        </Link>
+
+        <Switch>
+          <Route path="/:category" children={<Child />} />
+        </Switch>
+
       </Router>
+    );
+}
+
+
+function Child() {
+    let { category } = useParams();
+
+    return (
+      <div>
+        <h3>ID: {category}</h3>
+      </div>
     );
   }
 
-    const useQuery = () => {
-        const { category } = useLocation();
-      
-        return React.useMemo(() => new URLSearchParams(category), [category]);
-    }
-    
-    
-    const Links = () => {
-        let query = useQuery();
-        return (
-            <>
-              <Link className="header-nav_link general" to="/articles?category=general">
-                  Général
-              </Link>
-              <Link className="header-nav_link business" to="/articles?category=business">
-                  Economie
-              </Link>
-              <Link className="header-nav_link health" to="/articles?category=health">
-                  Santé
-              </Link>
-              <Link className="header-nav_link sports" to="/articles?category=sports">
-                  Sports
-              </Link>
-              <Link className="header-nav_link entertainment" to="/articles?category=entertainment">
-                  People
-              </Link>
-              <Link className="header-nav_link science" to="/articles?category=science">
-                  Science
-              </Link>
-              <Link className="header-nav_link technology" to="/articles?category=technology">
-                  Technologie
-              </Link>
-            
-              
-            </>
-        );
-    }

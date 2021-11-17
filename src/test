@@ -1,0 +1,36 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Link, Route, useParams } from 'react-router-dom';
+import List from '../ArticlesList/List';
+
+
+export default function Header() {
+    return (
+      <Router>
+        <Links />
+        <Routes>
+          <Route path="/articles">
+            <List />
+          </Route>
+        </Routes>
+      </Router>
+    );
+  }
+
+function Topic() {
+    let { topicId } = useParams();
+    console.log({topicId});
+}
+
+
+const Links = () => {
+    //let query = useQuery();
+    let top = Topic();
+   console.log(top)
+    return (
+        <>
+          
+        </>
+    );
+    
+}
+
