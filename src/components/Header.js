@@ -9,24 +9,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
-const Header = (props) => {
+const Header = () => {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/categories/')
+        axios.get('https://192.168.1.145:8000/categories/')
         .then(res => setDatas(res.data))
     }, [])
 
     const categories = datas.map(category => {
         return (
-            <Link className={`header-nav_link ${category.slug}`} to={category.slug} onClick={() => props.changeCategory(category.slug)}>
+            <Link className={`header-nav_link ${category.slug}`} to={category.slug} >
                 {category.name}
             </Link>
         );
     })
 
     return (
-        <Router>
             <header>
                 <div className="header-logo_container">
                     <Link className="link-logo" to="/">
@@ -38,7 +37,7 @@ const Header = (props) => {
                 <nav className="header-nav">
                     {categories}
                 </nav>
-
+{/*
                 <div className="user-board_container" id="userboardContainer">
                     <span className="userName_text"> John Doe </span>
                     <a className="user-profil_link">Accedez à votre profil</a>
@@ -47,7 +46,7 @@ const Header = (props) => {
                 <div className="user-panel_container">
                     <img className="user-picture_img" src={profilImageDefault} />
                 </div>
-
+*/}
                 <Link to="subscribe" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
                 <div className="small-connexion_container">
                     <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" />
@@ -69,7 +68,6 @@ const Header = (props) => {
                     </li>
                 </ul>
             </header>
-        </Router>
     )
 }
 
