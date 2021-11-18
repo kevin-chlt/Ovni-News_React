@@ -18,9 +18,10 @@ function App() {
         <Header changeCategory={changeCategory} />
 
         <Switch>
-            <Route path="/:category" render={() => <GetArticlesList category={category} />} />
+            <Route path="/:category" render={(props) => <GetArticlesList category={category}{...props} />} />
+              
+            <Route path="/"> <Accueil /> </Route> 
 
-            <Route exact path="/" component={Accueil} />
         </Switch>
       </Router>
 

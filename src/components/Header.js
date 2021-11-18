@@ -29,9 +29,9 @@ const Header = (props) => {
         <Router>
             <header>
                 <div className="header-logo_container">
-                    <a className="link-logo">
+                    <Link className="link-logo" to="/">
                         <img className="logo-header" src={logo} alt="logo" />
-                    </a>
+                    </Link>
                     <img className="small-category_icon" src={dropdownMenu} id="btn-category" alt="menu des categories" />
                 </div>
 
