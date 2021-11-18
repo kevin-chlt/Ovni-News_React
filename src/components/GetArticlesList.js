@@ -1,27 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-class GetArticlesList extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {data: []};
-    }
+const GetArticlesList = ({ category }) => {
+    const [data, setData] = useState([]);
 
-    compenentDidMount() {
-        let category = this.props.match.params.category;
+    useEffect(() => {
         axios.get(`https://127.0.0.1:8000/articles/${category}`)
         .then((res) => {
-        this.setData(res.data);
+        setData(res.data);
         })
-    }
+    }, [category])
 
-    render() {
-        return (
+    console.log(category)
+    return (
         <ul>
-            {this.data}
+            {category}
         </ul> 
-        )
-    } 
+    )
+    
 }
 
 export default GetArticlesList;

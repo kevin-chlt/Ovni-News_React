@@ -5,9 +5,26 @@ import switcherForm from '../images/house-user.svg';
 import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
 import logo from '../images/logo.svg';
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
-const Header = () => {
+const Header = (props) => {
+    const [datas, setDatas] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/categories/')
+        .then(res => setDatas(res.data))
+    }, [])
+
+    const categories = datas.map(category => {
+        return (
+            <Link className={`header-nav_link ${category.slug}`} to={category.slug} onClick={() => props.changeCategory(category.slug)}>
+                {category.name}
+            </Link>
+        );
+    })
+
     return (
         <Router>
             <header>
@@ -19,27 +36,7 @@ const Header = () => {
                 </div>
 
                 <nav className="header-nav">
-                    <Link className="header-nav_link general" to="/general">
-                        Général
-                    </Link>
-                    <Link className="header-nav_link business" to="/business">
-                        Economie
-                    </Link>
-                    <Link className="header-nav_link health" to="/health">
-                        Santé
-                    </Link>
-                    <Link className="header-nav_link sports" to="/sports">
-                        Sports
-                    </Link>
-                    <Link className="header-nav_link entertainment" to="/entertainment">
-                        People
-                    </Link>
-                    <Link className="header-nav_link science" to="/science">
-                        Science
-                    </Link>
-                    <Link className="header-nav_link technology" to="/technology">
-                        Technologie
-                    </Link>
+                    {categories}
                 </nav>
 
                 <div className="user-board_container" id="userboardContainer">
@@ -51,18 +48,18 @@ const Header = () => {
                     <img className="user-picture_img" src={profilImageDefault} />
                 </div>
 
-                <a className="user-subscribe_link" id="subscribe-container" href="./subscribe-check.php">Inscrivez-vous</a>
+                <Link to="subscribe" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
                 <div className="small-connexion_container">
                     <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" />
                 </div>
 
                 <div className="user-connexion_container" id="container-formConnect">
-                    <form className="user-connexion_form" method="POST" action="connexion-check.php" id="form-user">
+                    <form className="user-connexion_form" method="POST" id="form-user">
                         <input className="input" type="text" name="email" placeholder="Adresse mail" />
                         <input className="input" type="password" name="password" placeholder="Mot de passe" />
                     </form>
                     <div className="user-connexion_btn" id="submit-btn" role="button" tabIndex="0">
-                        <img className="user-connexion_img" src={loginBtn} />
+                        <img className="user-connexion_img" alt="bouton_de_connexion" src={loginBtn} />
                     </div>
                 </div>
 

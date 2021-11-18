@@ -3,20 +3,29 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GetArticlesList from "./components/GetArticlesList";
 import Header from './components/Header'
 import Accueil from './pages/Accueil';
+import { useState } from 'react'
 
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <Switch>
-          <Route path="/:category" component={ GetArticlesList } />
-            
-          <Route exact path="/" component={Accueil} />
-      </Switch>
-    </Router>
+    const [category, setCategory] = useState('');
 
-    )
+    const changeCategory = (category) => {
+        setCategory(category);
+    }
+
+    return (
+      <Router>
+        <Header changeCategory={changeCategory} />
+
+        <Switch>
+            <Route path="/:category" render={() => <GetArticlesList category={category} />} />
+
+            <Route exact path="/" component={Accueil} />
+        </Switch>
+      </Router>
+
+      )
 }
 
 export default App;
+
