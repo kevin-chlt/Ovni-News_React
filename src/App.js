@@ -1,8 +1,8 @@
 import { Routes, Route, useParams } from "react-router-dom";
-import './styles/header.css';
 import Header from './components/Header'
 import Accueil from './pages/Accueil';
-import GetArticlesList from './components/GetArticlesList';
+import Articles from "./pages/Articles";
+import GetArticlesList from "./components/GetArticlesList";
 
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
     <Header />
       
     <Routes>
-          <Route path="/:category" element={<Child />} />
+          <Route path="/:id" element={<Child />} />
           <Route path="/" element={<Accueil />} />
     </Routes>
   </>
@@ -22,6 +22,6 @@ export default function App() {
 function Child() {
   let  params = useParams(); 
   return (
-      <GetArticlesList category={params.category} />
+      <Articles category={params.id} />
   )
 }

@@ -1,10 +1,11 @@
 import React from "react";
+import '../styles/header.css';
 import dropdownMenu from '../images/align-justify.svg';
-import profilImageDefault from '../images/male-default-profile-picture.jpg';
+//import profilImageDefault from '../images/male-default-profile-picture.jpg';
 import switcherForm from '../images/house-user.svg';
 import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
 import logo from '../images/logo.svg';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ const Header = () => {
 
     const categories = datas.map(category => {
         return (
-            <Link className={`header-nav_link ${category.slug}`} to={category.slug} >
+            <Link key={category.id} className={`header-nav_link ${category.slug}`} to={`/${category.id}`} >
                 {category.name}
             </Link>
         );

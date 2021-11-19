@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const GetArticlesList = ({ category }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/${category}`)
+        axios.get(`https://192.168.1.145:8000/articles/${category}`)
         .then((res) => {
         setData(res.data);
         })
     }, [category])
 
-    
-    
 
     return (
-        <ul>
-            {category}
-        </ul> 
+        <>
+        {data.map((article) => (
+            <article key={article.id} className="container-list">
+                <img src={article.urlToImage} alt="image article" />
+                <a className="article-title" href="#">{article.title}</a>
+            </article>
+        ))}
+        </>
     )
     
 }
