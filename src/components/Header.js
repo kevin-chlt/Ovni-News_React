@@ -14,7 +14,7 @@ const Header = () => {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        axios.get('https://192.168.1.145:8000/categories/')
+        axios.get('https://localhost:8000/categories/')
         .then(res => setDatas(res.data))
     }, [])
 
@@ -50,7 +50,7 @@ const Header = () => {
 */}
                 <Link to="subscribe" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
                 <div className="small-connexion_container">
-                    <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" />
+                    <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" alt="image_form_switch" />
                 </div>
 
                 <div className="user-connexion_container" id="container-formConnect">

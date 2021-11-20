@@ -2,12 +2,27 @@ import React from 'react'
 import '../styles/articleList.css'
 import { Link } from 'react-router-dom'
 import GetArticlesList from '../components/GetArticlesList'
+import styled from 'styled-components'; 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loading from '../components/Loading';
+
 
 const Articles = ({ category }) => {
+    const [data, setData] = useState([]);
+    const [mounted, setMounted] = useState(false);
 
+    useEffect(() => {
+        axios.get(`https://localhost:8000/articles/${category}`)
+        .then((res) => {
+        setData(res.data);
+        setMounted(true)
+        })      
+        return () => setMounted(false) 
+    }, [category])
 
     return (
-        <main>
+    <Main>
         <aside>
             <div className="container-filter_nbrPerPage">
                 <select name="limit" id="numberPerPage">
@@ -25,13 +40,17 @@ const Articles = ({ category }) => {
                </select>
            </div>
         </aside>
-              { <GetArticlesList category={category} />}
+              {mounted ? <GetArticlesList data={data} /> : <Loading /> }
             
         <div className="pagination-container" id="pagination">
         </div>
         <Link to="/" className="btn-retour_text"> Retour à l'accueil</Link>
-    </main>
+    </Main>
     )
 }
 
 export default Articles
+
+const Main = styled.main`
+    background: white; 
+`

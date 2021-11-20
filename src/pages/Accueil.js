@@ -16,7 +16,7 @@ const Accueil = () => {
         <>
 <main>
     <div className="site-title_container">
-        <img src={logo} />
+        <img src={logo} alt="logo"/>
         <div className="site-title_text">
             <h1>L'OVNI</h1>
             <h2>L'information à chaud !</h2>
@@ -27,34 +27,34 @@ const Accueil = () => {
 
         <div className="category-list_container">
             <Link to="/general" >
-                 <img className="category-list_img" src={general}/>
+                 <img className="category-list_img" alt="image_category" src={general}/>
                 <span className="category-list_link">Général</span>
             </Link>    
             <Link to="/business" >
-                <img className="category-list_img" src={business}/>
+                <img className="category-list_img" alt="image_category" src={business}/>
                 <span className="category-list_link">Economie</span>
             </Link>    
             <Link to="/sports" >
-                <img className="category-list_img" src={sports}/>
+                <img className="category-list_img" alt="image_category" src={sports}/>
                 <span className="category-list_link">Sport</span>
             </Link> 
         </div> 
 
         <div className="category-list_container">
             <Link to="/entertainment" >
-                <img className="category-list_img" src={entertainment}/>
+                <img className="category-list_img" alt="image_category" src={entertainment}/>
                 <span className="category-list_link">People</span>
             </Link>    
             <Link to="/health" >
-                <img className="category-list_img" src={health}/>
+                <img className="category-list_img" alt="image_category" src={health}/>
                <span className="category-list_link">Santé</span>
             </Link>    
             <Link to="/science" >
-                <img className="category-list_img" src={science}/>
+                <img className="category-list_img" alt="image_category" src={science}/>
                 <span className="category-list_link">Science</span>
             </Link>    
             <Link to="/technology" >
-                <img className="category-list_img" src={technology}/>
+                <img className="category-list_img" alt="image_category" src={technology}/>
                <span className="category-list_link">Technologie</span>
             </Link> 
         </div>  
