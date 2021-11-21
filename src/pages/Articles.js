@@ -52,5 +52,9 @@ const Articles = ({ category }) => {
 export default Articles
 
 const Main = styled.main`
-    background: white; 
+    background: #FFF; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `

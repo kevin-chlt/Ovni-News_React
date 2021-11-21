@@ -2,6 +2,7 @@ import { Routes, Route, useParams } from "react-router-dom";
 import Header from './components/Header'
 import Accueil from './pages/Accueil';
 import Articles from "./pages/Articles";
+import Details from "./pages/Details";
 
 
 export default function App() {
@@ -10,8 +11,9 @@ export default function App() {
     <Header />
       
     <Routes>
-          <Route path="/:id" element={<Child />} />
-          <Route path="/" element={<Accueil />} />
+        <Route path="/:categoryId/:articleId" element={<ChildTwo />} />
+        <Route path="/:categoryId" element={<Child />} />
+        <Route path="/" element={<Accueil />} />
     </Routes>
   </>
       )
@@ -21,6 +23,13 @@ export default function App() {
 function Child() {
   let  params = useParams(); 
   return (
-      <Articles category={params.id} />
+      <Articles category={params.categoryId} />
+  )
+}
+
+function ChildTwo () {
+  let params = useParams(); 
+  return (
+    <Details articleId={params.articleId} />
   )
 }

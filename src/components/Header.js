@@ -20,7 +20,7 @@ const Header = () => {
 
     const categories = datas.map(category => {
         return (
-            <Link key={category.id} className={`header-nav_link ${category.slug}`} to={`/${category.id}`} >
+            <Link key={category.id} className={`header-nav_link ${category.slug}`} to={`/${category.slug}`} >
                 {category.name}
             </Link>
         );
