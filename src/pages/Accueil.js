@@ -8,13 +8,15 @@ import technology from '../images/technology.jpg'
 import business from '../images/business.jpg'
 import entertainment from '../images/entertainment.jpg'
 import science from '../images/science.jpg'
-import sports from '../images/sports.jpg'
+import sports from '../images/sports.jpg';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 
 const Accueil = () => {
     return (
         <>
-<main>
+<Main>
     <div className="site-title_container">
         <img src={logo} alt="logo"/>
         <div className="site-title_text">
@@ -60,10 +62,16 @@ const Accueil = () => {
         </div>  
     </div>
 
-</main>
+</Main>
 <Footer />
 </>
     )
 }
 
 export default Accueil;
+
+const Main = styled.main`
+    @media (max-width: 850px) {
+        padding: 15px 0;
+    }
+`

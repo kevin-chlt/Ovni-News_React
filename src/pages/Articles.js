@@ -1,11 +1,11 @@
 import React from 'react'
 import '../styles/articleList.css'
-import { Link } from 'react-router-dom'
 import GetArticlesList from '../components/GetArticlesList'
 import styled from 'styled-components'; 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import Footer from '../components/Footer';
 
 
 const Articles = ({ category }) => {
@@ -22,8 +22,9 @@ const Articles = ({ category }) => {
     }, [category])
 
     return (
+    <>
     <Main>
-        <aside>
+        <FiltersWrapper>
             <div className="container-filter_nbrPerPage">
                 <select name="limit" id="numberPerPage">
                     <option value="0">Nombre d'articles</option>
@@ -39,13 +40,11 @@ const Articles = ({ category }) => {
                    <option value="0">Choissisez une source</option>
                </select>
            </div>
-        </aside>
+        </FiltersWrapper>
               {mounted ? <GetArticlesList data={data} /> : <Loading /> }
-            
-        <div className="pagination-container" id="pagination">
-        </div>
-        <Link to="/" className="btn-retour_text"> Retour à l'accueil</Link>
     </Main>
+    <Footer />
+    </>
     )
 }
 
@@ -57,4 +56,23 @@ const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 70vh;
+`
+
+const FiltersWrapper = styled.aside`
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: flex-start;
+    @media (max-width: 950px) {
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+    @media  (max-width: 720px){    
+        width: 100%;
+    }
+    @media (max-width: 550px) {
+        justify-content: space-around;
+        width: 100%;
+    }
 `

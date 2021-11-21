@@ -31,5 +31,9 @@ const LoadingIcon = styled.div`
     border-radius: 50%;
     animation: ${Load8} 1.1s infinite linear;
     transition: opacity 0.3s;
+    @media (max-width: 800px) {
+        width: 2em; 
+        height: 2em; 
+    }
 `
 

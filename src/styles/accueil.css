@@ -1,11 +1,3 @@
-body {
-    margin: 0;
-}
-
-main{
-    background: url("../images/fond-mur-blanc_24836-89.jpg");
-}
-
 .site-title_container{
     display: flex;
     align-items: center;
@@ -105,10 +97,6 @@ main{
 }
 
 @media screen and (max-width: 850px) {
-    main{
-        padding: 15px 0;
-    }
-
     .site-title_container img {
         width: 120px;
     }
@@ -200,6 +188,5 @@ main{
         .site-title_container img {
             width: 80px;
         }
-
     }
 }

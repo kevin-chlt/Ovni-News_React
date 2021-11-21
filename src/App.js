@@ -30,6 +30,6 @@ function Child() {
 function ChildTwo () {
   let params = useParams(); 
   return (
-    <Details articleId={params.articleId} />
+    <Details category={params.categoryId} articleId={params.articleId} />
   )
 }
