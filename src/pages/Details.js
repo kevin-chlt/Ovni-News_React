@@ -2,11 +2,11 @@ import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
 import '../styles/showArticle.css';
-import submitCommentImage from '../images/arrow-circle-right_pageArticle.svg';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom'
+import ArticlesComments from '../components/ArticlesComments';
 
 
 const Details = ({ categoryId, articleId }) => {
@@ -45,10 +45,10 @@ const Details = ({ categoryId, articleId }) => {
             <Link to={`/${data.category[0].slug}`}>
                 Retour
             </Link>
-            <Link to={`/${data.id -1}`} >
+            <Link to={`/${data.category[0].slug}/${data.id -1}`} >
                 Precedent
             </Link>
-            <Link to={`/${data.id +1}`} >
+            <Link to={`/${data.category[0].slug}/${data.id +1}`} >
                 Suivant
             </Link>
             <a href={data.externalLink} target="_blank" rel="noreferrer noopener">
@@ -56,28 +56,9 @@ const Details = ({ categoryId, articleId }) => {
             </a>
         </div>
     </ArticleWrapper>
-    <CommentWrapper className="CommentWrapper">
-        <h3>Espace commentaires</h3>
 
-        <form method="POST" id="comment-form">
-            <label htmlFor="message">Ecrivez votre commentaire</label>
-            <div className="form-sendbox">
-                <textarea name="message" rows="3" id="message"></textarea>
-                <img role="button" src={submitCommentImage} id="comment-btn" alt="bouton_envoi_commentaire" />
-            </div>
-            <span className="help-text_comment" id="help-text_comment"></span>
-        </form>
+        <ArticlesComments />
 
-        <h4>Les derniers commentaires :</h4>
-
-        <span className="no-comment-text">Il n'y a pas de commentaire, soyez le premier à l'écrire !</span>'
-        
-        <div className="user-comments_box">
-                <span className="username"> John Doe</span>
-                <span> comment content </span>
-                <span className="createdAt"> 02/02/2021 </span>
-        </div>
-    </CommentWrapper>
 </Main>
 <Footer />
 </>
@@ -108,31 +89,6 @@ const ArticleWrapper = styled.article`
     }
 `
 
-const CommentWrapper = styled.aside`
-    height: 100vh;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    @media (max-width: 1450px) {
-        width: 50%;
-        height: auto;
-        overflow-y: inherit;
-        margin: 30px 0;
-    }
-    @media (max-width: 900px) {
-        width: 70%;
-    }
-    @media (max-width: 650px) {
-        margin-top: 10px;
-        width: 90%;
-        border: none;
-    }
-    @media (max-width: 500px) {
-        width: 90%;
-        border-top: #D83A56 1px solid;
-        border-radius: inherit;
-    }
-`
+
 
 
