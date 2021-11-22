@@ -3,17 +3,20 @@ import '../styles/registration.css';
 import styled from 'styled-components'; 
 import logo from '../images/logo_transparent.svg'
 import { Link } from 'react-router-dom';
+import Helptext from '../components/Helptext';
 
 
 const Registration = () => {
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
-    const [user, setUser] = useState({}); 
+    const [user, setUser] = useState([]); 
+    const [errors, setErrors] = useState('');
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
             type: 'email',
             label: 'Email',
+            pattern: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/
         },
         {
             placeholder: 'Taper votre prénom',
@@ -40,20 +43,35 @@ const Registration = () => {
         },
     ];
 
+    const handleInput = (e) => {
+        setInputValue(e.target.value); 
+        setErrors('');
+    }
+
     const validate = () => {
-        setCounter(counter +1)
-        if(form[counter -1].pattern) {
-            if(inputValue.match(form[counter -1].pattern)){
-                setUser({...user}, form[counter -1].label: inputValue);
-            } 
+    if(form[counter].pattern && !patternValidation()) {
+        setErrors('Champ invalide');
+        return; 
+    }
+    setCounter(counter +1)
+
+    let key = form[counter].label
+    setUser([...user, {[key] : inputValue}]);
+    setInputValue(''); 
+    console.log(user) 
+    }
+
+    const patternValidation = () => {
+        if(inputValue.match(form[counter].pattern)){
+            return true; 
         }
-        setInputValue(''); 
-        console.log(user);
+
+        return false;
     }
 
     return (
         <Main>
-            <form method="POST" id="form" className="registration-form">
+            <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">
                         <img className="logo-header" src={logo} alt="logo" />
@@ -65,16 +83,18 @@ const Registration = () => {
                     <p>Pour vous enregistrer, veuillez écrire votre nom et prénom ainsi que votre date de naissance, un mot de passe et une adresse email valide.</p>
                 </div>
                 <div className="input_container">
-                    <label id="label">{form[counter -1].label}</label>
-                    <input type={form[counter -1].type} value={inputValue} placeholder={form[counter -1].placeholder} onChange={(e) => setInputValue(e.target.value)} required/>
+                    { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
+                    <input type={form[counter].type} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
+                    onChange={(e) => handleInput(e) } required/>
+                    <Helptext content={errors}/>
                 </div>
                 <div className="btn-container">
-                    {counter > 1 ? <button type="button" onClick={() => setCounter(counter -1)}> Précédent </button> : null} 
-                    <span className="counter_text">{counter}/5</span>
-                    {counter === 5 ? <button type="button"> M'inscrire</button> : null} 
-                    {counter <= 4 ? <button type="button" onClick={() => validate()}> Suivant </button> : null}
+                    {counter > 0 ? <button type="button" onClick={() => setCounter(counter -1)}> Précédent </button> : null} 
+                    <span className="counter_text">{counter +1}/5</span>
+                    {counter === 4 ? <button type="button"> M'inscrire</button> : null} 
+                    {counter <= 3 ? <button type="button" onClick={() => validate()}> Suivant </button> : null}
                 </div>
-            </form>
+            </div>
         </Main>
     )
 }

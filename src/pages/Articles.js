@@ -13,7 +13,7 @@ const Articles = ({ category }) => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://localhost:8000/articles/${category}`)
+        axios.get(`https://127.0.0.1:8000/articles/${category}`)
         .then((res) => {
         setData(res.data);
         setMounted(true)

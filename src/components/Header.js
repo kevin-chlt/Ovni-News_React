@@ -14,7 +14,7 @@ const Header = () => {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        axios.get('https://localhost:8000/categories/')
+        axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
     }, [])
 

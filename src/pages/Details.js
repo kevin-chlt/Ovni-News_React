@@ -14,7 +14,7 @@ const Details = ({ categoryId, articleId }) => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://localhost:8000/articles/${categoryId}/${articleId}`)
+        axios.get(`https://127.0.0.1:8000/articles/${categoryId}/${articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
