@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Accueil from './pages/Accueil';
 import Articles from "./pages/Articles";
 import Details from "./pages/Details";
+import Registration from "./pages/Registration";
 
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
     <Header />
       
     <Routes>
+        <Route path="/registration" element={<Registration />} />
         <Route path="/:categoryId/:articleId" element={<ChildTwo />} />
         <Route path="/:categoryId" element={<Child />} />
         <Route path="/" element={<Accueil />} />

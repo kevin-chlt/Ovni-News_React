@@ -48,7 +48,7 @@ const Header = () => {
                     <img className="user-picture_img" src={profilImageDefault} />
                 </div>
 */}
-                <Link to="subscribe" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
+                <Link to="/registration" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
                 <div className="small-connexion_container">
                     <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" alt="image_form_switch" />
                 </div>

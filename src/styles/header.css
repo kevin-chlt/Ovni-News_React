@@ -21,7 +21,7 @@ header{
     height: 80px;
 }
 
-.link-logo{
+header .link-logo{
     display: flex;
     justify-content: center;
     height: 100%;
@@ -212,7 +212,7 @@ header{
         grid-column: 1;
     }
 
-    .small-category_icon, .link-logo{
+    .small-category_icon, header .link-logo{
         height: 70px;
         width: 70px;
         display: flex;
@@ -331,7 +331,7 @@ header{
         align-items: center
     }
 
-    .small-category_icon, .link-logo, .small-connexion_icon{
+    .small-category_icon, header .link-logo, .small-connexion_icon{
         height: 60px;
     }
 
@@ -364,7 +364,7 @@ header{
         padding: 15px;
     }
 
-    .small-category_icon, .link-logo, .small-connexion_icon{
+    .small-category_icon, header .link-logo, .small-connexion_icon{
         width: 50px;
         height: 45px;
     }
