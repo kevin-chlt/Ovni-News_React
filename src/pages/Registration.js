@@ -16,30 +16,34 @@ const Registration = () => {
             placeholder: 'Entrer une adresse email valide',
             type: 'email',
             label: 'Email',
-            pattern: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/
+            pattern: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/,
+            nameInDb: 'email'
         },
         {
             placeholder: 'Taper votre prénom',
             type: 'text',
             label: 'Prénom',
-            pattern: /^[.A-zÀ-ÿ-]+$/
+            pattern: /^[.A-zÀ-ÿ-]+$/,
+            nameInDb: 'firstname'
         },
         {
             placeholder: 'Taper votre nom',
             type: 'text',
             label: 'Nom',
-            pattern: /^[.A-zÀ-ÿ-]+$/
+            pattern: /^[.A-zÀ-ÿ-]+$/,
+            nameInDb: 'lastname'
         },
         {
             placeholder: 'Inserer un mot de passe sûr',
             type: 'password',
             label: 'Mot de passe',
-            
+            nameInDb: 'password'
         },
         {
             placeholder: 'Quand êtes vous née ? (JJ/MM/AAAA)',
             type: 'date',
             label: 'Date de naissance', 
+            nameInDb: 'birthdate'
         },
     ];
 
@@ -49,16 +53,17 @@ const Registration = () => {
     }
 
     const validate = () => {
-    if(form[counter].pattern && !patternValidation()) {
-        setErrors('Champ invalide');
-        return; 
-    }
-    setCounter(counter +1)
+        if(form[counter].pattern && !patternValidation()) {
+            return setErrors('Champ invalide');
+        }else if (counter === 4) {
+            // Call method insert in DB.
+        }
 
-    let key = form[counter].label
-    setUser([...user, {[key] : inputValue}]);
-    setInputValue(''); 
-    console.log(user) 
+        setCounter(counter +1)
+
+        let key = form[counter].nameInDb
+        setUser([...user, {[key] : inputValue}]);
+        setInputValue(''); 
     }
 
     const patternValidation = () => {
@@ -68,6 +73,15 @@ const Registration = () => {
 
         return false;
     }
+
+    const handlePreviousBtn = () => {
+        setCounter(counter -1); 
+        let lastInfo = user[user.length === 0 ? user.length : user.length -1]; 
+        let newUser = user.filter(info => info !== lastInfo )
+        setUser(newUser)
+    }
+
+
 
     return (
         <Main>
@@ -89,9 +103,9 @@ const Registration = () => {
                     <Helptext content={errors}/>
                 </div>
                 <div className="btn-container">
-                    {counter > 0 ? <button type="button" onClick={() => setCounter(counter -1)}> Précédent </button> : null} 
+                    {counter > 0 ? <button type="button" onClick={() => handlePreviousBtn() }> Précédent </button> : null} 
                     <span className="counter_text">{counter +1}/5</span>
-                    {counter === 4 ? <button type="button"> M'inscrire</button> : null} 
+                    {counter === 4 ? <button type="button" onClick={() => validate()}> M'inscrire</button> : null} 
                     {counter <= 3 ? <button type="button" onClick={() => validate()}> Suivant </button> : null}
                 </div>
             </div>
