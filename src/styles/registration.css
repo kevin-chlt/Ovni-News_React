@@ -108,6 +108,7 @@
     border: none;
 }
 
+
 @media screen and (max-width: 1750px){
     .container_title h1{
         font-size: 2.3rem;

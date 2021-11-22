@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import logo from '../images/logo_transparent.svg'
 import { Link } from 'react-router-dom';
 import Helptext from '../components/Helptext';
+import axios from 'axios';
 
 
 const Registration = () => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
-    const [errors, setErrors] = useState('');
+    const [inputErrors, setInputErrors] = useState('');
+    const [success, setSuccess] = useState(null);
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
@@ -47,30 +49,46 @@ const Registration = () => {
         },
     ];
 
+    const insertUserInDb = () => {
+        const data = Object.assign({}, ...user);
+        axios.post('https://127.0.0.1:8000/registration', {data})
+        .then(() =>{
+            setSuccess(true);
+            setInputErrors('Bienvenue '+data.firstname)
+        })
+        .catch(error => {
+            setSuccess(false);
+            setInputErrors(error.response.data);
+        })
+    }
+
     const handleInput = (e) => {
         setInputValue(e.target.value); 
-        setErrors('');
+        setInputErrors('');
+        setSuccess(null);
     }
 
     const validate = () => {
-        if(form[counter].pattern && !patternValidation()) {
-            return setErrors('Champ invalide');
-        }else if (counter === 4) {
-            // Call method insert in DB.
-        }
+        if(form[counter].pattern && !patternValidation() && inputValue.length > 1) {
+            setSuccess(false);
+            return setInputErrors('Champ invalide');
+        } 
 
         setCounter(counter +1)
-
         let key = form[counter].nameInDb
         setUser([...user, {[key] : inputValue}]);
         setInputValue(''); 
+        
+        if (counter === 4) {
+            setCounter(0); 
+            insertUserInDb();
+        }
     }
 
     const patternValidation = () => {
         if(inputValue.match(form[counter].pattern)){
             return true; 
         }
-
         return false;
     }
 
@@ -79,12 +97,13 @@ const Registration = () => {
         let lastInfo = user[user.length === 0 ? user.length : user.length -1]; 
         let newUser = user.filter(info => info !== lastInfo )
         setUser(newUser)
+        setInputValue('');
     }
-
 
 
     return (
         <Main>
+            <Helptext success={success} content={inputErrors} />
             <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">
@@ -96,11 +115,12 @@ const Registration = () => {
                     <p>Afin de pouvoir accéder à certaines fonctionnalitée de l'OVNI, vous aurez besoin d'un compte.</p>
                     <p>Pour vous enregistrer, veuillez écrire votre nom et prénom ainsi que votre date de naissance, un mot de passe et une adresse email valide.</p>
                 </div>
+
+
                 <div className="input_container">
                     { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
                     <input type={form[counter].type} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
                     onChange={(e) => handleInput(e) } required/>
-                    <Helptext content={errors}/>
                 </div>
                 <div className="btn-container">
                     {counter > 0 ? <button type="button" onClick={() => handlePreviousBtn() }> Précédent </button> : null} 
@@ -116,6 +136,7 @@ const Registration = () => {
 export default Registration
 
 const Main = styled.main`
+    position: relative;
     height: 100vh;
     display: flex;
     align-items: center;

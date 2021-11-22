@@ -36,7 +36,7 @@ const Header = () => {
                 </div>
 
                 <nav className="header-nav">
-                    {categories}
+                    { categories }
                 </nav>
 {/*
                 <div className="user-board_container" id="userboardContainer">
