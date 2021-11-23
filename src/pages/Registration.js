@@ -3,16 +3,13 @@ import '../styles/registration.css';
 import styled from 'styled-components'; 
 import logo from '../images/logo_transparent.svg'
 import { Link } from 'react-router-dom';
-import Helptext from '../components/Helptext';
 import axios from 'axios';
 
 
-const Registration = () => {
+const Registration = ({ handleErrors }) => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
-    const [inputErrors, setInputErrors] = useState('');
-    const [success, setSuccess] = useState(null);
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
@@ -53,25 +50,21 @@ const Registration = () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
         .then(() =>{
-            setSuccess(true);
-            setInputErrors('Bienvenue '+data.firstname)
+            handleErrors(`Bienvenue ${data.firstname}`)
         })
-        .catch(error => {
-            setSuccess(false);
-            setInputErrors(error.response.data);
+        .catch(() => {
+            handleErrors('Une erreur est apparu lors de la validation de vos données, merci de re-remplir le formulaire', false)
         })
     }
 
     const handleInput = (e) => {
         setInputValue(e.target.value); 
-        setInputErrors('');
-        setSuccess(null);
     }
 
     const validate = () => {
         if(form[counter].pattern && !patternValidation() && inputValue.length > 1) {
-            setSuccess(false);
-            return setInputErrors('Champ invalide');
+            handleErrors('Champs Invalide')
+            return; 
         } 
 
         setCounter(counter +1)
@@ -103,7 +96,6 @@ const Registration = () => {
 
     return (
         <Main>
-            <Helptext success={success} content={inputErrors} />
             <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">
@@ -115,7 +107,6 @@ const Registration = () => {
                     <p>Afin de pouvoir accéder à certaines fonctionnalitée de l'OVNI, vous aurez besoin d'un compte.</p>
                     <p>Pour vous enregistrer, veuillez écrire votre nom et prénom ainsi que votre date de naissance, un mot de passe et une adresse email valide.</p>
                 </div>
-
 
                 <div className="input_container">
                     { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
@@ -136,7 +127,6 @@ const Registration = () => {
 export default Registration
 
 const Main = styled.main`
-    position: relative;
     height: 100vh;
     display: flex;
     align-items: center;

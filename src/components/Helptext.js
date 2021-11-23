@@ -1,35 +1,42 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React, { useState, useEffect }  from 'react'
+import styled from 'styled-components'
 
-const Helptext = ({ content, success }) => {
+const Helptext = ({ content }) => {
+    const [opacity, setOpacity] = useState(0); 
+
+    useEffect(() => {
+        if(content !== '') {
+            setOpacity(1);
+
+            setTimeout(() => {
+                setOpacity(0);
+            }, 4000)
+        }
+    }, [content])
+
+
     return (
-        <HelpTextContainer>
-            <HelpSpan success={success}>
-                {content}
-            </HelpSpan>
-        </HelpTextContainer>
+    <HelpTextContainer content={content} opacity={opacity}>
+        <HelpSpan>
+            {content}
+        </HelpSpan>
+    </HelpTextContainer>
     )
 }
 
-export default Helptext
+export default Helptext;
 
 const HelpSpan = styled.span`
-    color: ${props => props.success ? 'red' : 'green'};
-`
-
-const PopUp = keyframes`
-    0% {
-        height: 0; 
-    } 100% {
-        height: 20px;   
+    font-style: italic;
+    color: #fff;   
 `
 
 const HelpTextContainer = styled.div`
-    display: ${props => props.success === null ? 'none' : 'block'};
-    background-color: #ffffff;
+    position: ${props => props.opacity === 1 ? 'relative' : 'absolute'} ; 
+    opacity: ${props => props.opacity};
+    transition: opacity 1s;
+    background-color: #D83A56;
     width: 100%;
-    height: 20px;
-    text-align: center;
     padding: 10px 0;
-    transition: ${PopUp} 1s linear;
+    text-align: center; 
 `
