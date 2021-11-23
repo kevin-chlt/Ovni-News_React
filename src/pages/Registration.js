@@ -16,33 +16,40 @@ const Registration = ({ handleErrors }) => {
             type: 'email',
             label: 'Email',
             pattern: /^[\w-.]+@([\w-]+.)+[\w-]{2,4}$/,
-            nameInDb: 'email'
+            nameInDb: 'email', 
+            autocomplete: 'email'
         },
         {
             placeholder: 'Taper votre prénom',
             type: 'text',
             label: 'Prénom',
             pattern: /^[.A-zÀ-ÿ-]+$/,
-            nameInDb: 'firstname'
+            nameInDb: 'firstname',
+            autocomplete: 'given-name'
         },
         {
             placeholder: 'Taper votre nom',
             type: 'text',
             label: 'Nom',
             pattern: /^[.A-zÀ-ÿ-]+$/,
-            nameInDb: 'lastname'
+            nameInDb: 'lastname',
+            autocomplete: 'family-name'
+
         },
         {
             placeholder: 'Inserer un mot de passe sûr',
             type: 'password',
             label: 'Mot de passe',
-            nameInDb: 'password'
+            nameInDb: 'password', 
+            autocomplete: 'new-password'
+
         },
         {
-            placeholder: 'Quand êtes vous née ? (JJ/MM/AAAA)',
+            placeholder: '',
             type: 'date',
             label: 'Date de naissance', 
-            nameInDb: 'birthdate'
+            nameInDb: 'birthdate', 
+            autocomplete: 'bday'
         },
     ];
 
@@ -50,20 +57,21 @@ const Registration = ({ handleErrors }) => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
         .then(() =>{
-            handleErrors(`Bienvenue ${data.firstname}`)
+            handleErrors(`Bienvenue ${data.firstname}`, 'darkgreen')
         })
-        .catch(() => {
-            handleErrors('Une erreur est apparu lors de la validation de vos données, merci de re-remplir le formulaire', false)
+        .catch((errors) => {
+            handleErrors(errors.response.data.violations[0].message, '#D83A56')
         })
     }
 
     const handleInput = (e) => {
         setInputValue(e.target.value); 
+        handleErrors('', 'transparent')
     }
 
     const validate = () => {
         if(form[counter].pattern && !patternValidation() && inputValue.length > 1) {
-            handleErrors('Champs Invalide')
+            handleErrors('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
             return; 
         } 
 
@@ -110,7 +118,7 @@ const Registration = ({ handleErrors }) => {
 
                 <div className="input_container">
                     { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
-                    <input type={form[counter].type} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
+                    <input type={form[counter].type} autoComplete={form[counter].autocomplete} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
                     onChange={(e) => handleInput(e) } required/>
                 </div>
                 <div className="btn-container">

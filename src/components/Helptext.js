@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react'
 import styled from 'styled-components'
 
-const Helptext = ({ content }) => {
+const Helptext = ({ content, background }) => {
     const [opacity, setOpacity] = useState(0); 
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const Helptext = ({ content }) => {
 
 
     return (
-    <HelpTextContainer content={content} opacity={opacity}>
+    <HelpTextContainer opacity={opacity} background={background} content={content}>
         <HelpSpan>
             {content}
         </HelpSpan>
@@ -33,9 +33,9 @@ const HelpSpan = styled.span`
 
 const HelpTextContainer = styled.div`
     position: ${props => props.opacity === 1 ? 'relative' : 'absolute'} ; 
-    opacity: ${props => props.opacity};
+    opacity: ${props => props.content === '' ? '0' : props.opacity};
+    background-color: ${props => props.background};
     transition: opacity 1s;
-    background-color: #D83A56;
     width: 100%;
     padding: 10px 0;
     text-align: center; 

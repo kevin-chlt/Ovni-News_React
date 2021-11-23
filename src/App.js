@@ -11,14 +11,16 @@ import Helptext from './components/Helptext';
 
 export default function App() {
   const [errors, setErrors] = useState('');
+  const [background, setBackground] = useState('')
 
-  const handleErrors = (errors) => {
+  const handleErrors = (errors, background) => {
     setErrors(errors); 
+    setBackground(background);
   }
 
     return (
   <>
-    <Helptext content={errors} />
+    <Helptext content={errors} background={background} />
     <Header />
       
     <Routes>
