@@ -193,7 +193,7 @@ header .link-logo{
 
 /* MEDIA QUERIES */
 
-.small-connexion_container,.small-category_icon {
+.small-connexion_container,.small-category_icon, .responsive-dropdown_close, .responsive-dropdown_open {
     display: none;
 }
 
@@ -224,17 +224,14 @@ header .link-logo{
         margin: 0;
         width: 100vw;
         flex-direction: column;
-        transition: all .5s;
     }
 
     .responsive-dropdown_open{
-        height: 400px;
-        opacity: 1;
+        display: flex;    
     }
 
     .responsive-dropdown_close{
-        height: 0;
-        opacity: 0;
+        display: none;
     }
 
     .responsive-text_container{

@@ -21,7 +21,7 @@ export default function App() {
     return (
   <>
     <Helptext content={errors} background={background} />
-    <Header />
+    <Header handleErrors={handleErrors} />
       
     <Routes>
         <Route path="/registration" element={<Registration handleErrors={handleErrors} />} />

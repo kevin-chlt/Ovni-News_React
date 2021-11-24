@@ -17,7 +17,7 @@ const Articles = ({ category }) => {
         .then((res) => {
         setData(res.data);
         setMounted(true)
-        })      
+        })
         return () => setMounted(false) 
     }, [category])
 

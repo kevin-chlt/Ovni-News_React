@@ -3,24 +3,29 @@ import '../styles/header.css';
 import dropdownMenu from '../images/align-justify.svg';
 //import profilImageDefault from '../images/male-default-profile-picture.jpg';
 import switcherForm from '../images/house-user.svg';
-import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
 import logo from '../images/logo.svg';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
+import Login from "./Login";
 
 
-const Header = () => {
+const Header = ({ handleErrors }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownClassname, setDropdownClassname] = useState('close');
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
+        .catch(() => handleErrors('Une erreur de réseau est apparue, veuillez réessayez plus tard.', '#D83A56'))
     }, [])
 
-    const handleDropdownClassname = (e) => {
+    const handleClickOnDropdownCategory = () => {
+        setDropdownClassname('close'); 
+    }
+
+    const handleDropdownClassname = () => {
         setDropdownClassname(dropdownClassname === 'close' ? 'open' : 'close');
     }
 
@@ -58,19 +63,17 @@ const Header = () => {
 */}
                 <Link to="/registration" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
                 <div className="small-connexion_container">
-                    <img src={switcherForm} className="small-connexion_icon" id="btn-img_connexion" alt="image_form_switch" />
+                    <img src={switcherForm} className="small-connexion_icon" alt="image_form_switch" />
                 </div>
 
-                <div className="user-connexion_container" id="container-formConnect">
-                    <div className="user-connexion_form">
-                        <input className="input" type="text" name="email" placeholder="Adresse mail" />
-                        <input className="input" type="password" name="password" placeholder="Mot de passe" />
-                    </div>
-                    <div className="user-connexion_btn" role="button" tabIndex="0">
-                        <img className="user-connexion_img" alt="bouton_de_connexion" src={loginBtn} />
-                    </div>
+                <div className="user-connexion_container">
+                    <Login handleErrors={handleErrors} />
                 </div>
-                <DropdownMenu categories={datas} dropdownState={dropdownClassname} />
+                <DropdownMenu 
+                categories={datas} 
+                dropdownState={dropdownClassname} 
+                handleClickOnDropdownCategory={handleClickOnDropdownCategory}
+                />
                 
             </header>
     )
