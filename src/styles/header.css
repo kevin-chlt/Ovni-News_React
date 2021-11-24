@@ -193,7 +193,7 @@ header .link-logo{
 
 /* MEDIA QUERIES */
 
-.small-connexion_container,.small-category_icon, .responsive_dropdown, .responsive-dropdown_open {
+.small-connexion_container,.small-category_icon {
     display: none;
 }
 
@@ -223,7 +223,6 @@ header .link-logo{
         padding: 0;
         margin: 0;
         width: 100vw;
-        display: none;
         flex-direction: column;
         transition: all .5s;
     }
@@ -328,7 +327,7 @@ header .link-logo{
     .small-connexion_container{
         display: flex;
         justify-content: center;
-        align-items: center
+        align-items: center;
     }
 
     .small-category_icon, header .link-logo, .small-connexion_icon{

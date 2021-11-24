@@ -20,6 +20,14 @@ const Registration = ({ handleErrors }) => {
             autocomplete: 'email'
         },
         {
+            placeholder: 'Inserer un mot de passe sûr',
+            type: 'password',
+            label: 'Mot de passe',
+            nameInDb: 'password', 
+            autocomplete: 'new-password'
+
+        },
+        {
             placeholder: 'Taper votre prénom',
             type: 'text',
             label: 'Prénom',
@@ -34,15 +42,6 @@ const Registration = ({ handleErrors }) => {
             pattern: /^[.A-zÀ-ÿ-]+$/,
             nameInDb: 'lastname',
             autocomplete: 'family-name'
-
-        },
-        {
-            placeholder: 'Inserer un mot de passe sûr',
-            type: 'password',
-            label: 'Mot de passe',
-            nameInDb: 'password', 
-            autocomplete: 'new-password'
-
         },
         {
             placeholder: '',
@@ -60,8 +59,14 @@ const Registration = ({ handleErrors }) => {
             handleErrors(`Bienvenue ${data.firstname}`, 'darkgreen')
         })
         .catch((errors) => {
-            handleErrors(errors.response.data.violations[0].message, '#D83A56')
+            // If error coming from server side validator bundle show to user, else show generic error
+            if (errors.response.status === 422) {
+                handleErrors(errors.response.data.violations[0].message, '#D83A56')
+            } else {
+                handleErrors('Une erreur est apparu lors de la connexion au serveur, veuillez réésayer plus tard.', '#D83A56')
+            }
         })
+        .then(() => setUser([])); 
     }
 
     const handleInput = (e) => {
@@ -70,7 +75,7 @@ const Registration = ({ handleErrors }) => {
     }
 
     const validate = () => {
-        if(form[counter].pattern && !patternValidation() && inputValue.length > 1) {
+        if((form[counter].pattern && !patternValidation()) || inputValue.length < 1) {
             handleErrors('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
             return; 
         } 
@@ -82,7 +87,7 @@ const Registration = ({ handleErrors }) => {
         
         if (counter === 4) {
             setCounter(0); 
-            insertUserInDb();
+            insertUserInDb(); 
         }
     }
 
