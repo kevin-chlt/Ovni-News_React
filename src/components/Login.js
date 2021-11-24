@@ -3,14 +3,12 @@ import React, { useState, useEffect } from 'react';
 import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
 
 
-const Login = ({ handleErrors }) => {
+const Login = () => {
     const [inputEmail, setInputEmail] = useState(''); 
     const [inputPassword, setInputPassword] = useState('');
     const [userCredential, setUserCredential] = useState([]); 
 
-    useEffect(() => {
-        handleErrors('', 'transparent')
-    }, [inputPassword, inputEmail])
+
 
     const getCredentials = () => {
         axios.post('https://localhost:8000/api/login_check', {
@@ -23,9 +21,7 @@ const Login = ({ handleErrors }) => {
         })
         .catch(errors => {
             if(errors.response.status === 401) {
-                handleErrors('Identifiants invalides.','#D83A56')
             }else {
-                handleErrors(errors.message, '#D83A56')
             }
         })
     }

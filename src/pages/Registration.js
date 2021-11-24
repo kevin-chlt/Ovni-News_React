@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import logo from '../images/logo_transparent.svg'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Helptext from '../components/Helptext'
 
 
-const Registration = ({ handleErrors }) => {
+const Registration = () => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
@@ -51,7 +52,15 @@ const Registration = ({ handleErrors }) => {
             autocomplete: 'bday'
         },
     ];
+    const [errors, setErrors] = useState('');
+    const [background, setBackground] = useState('')
+  
 
+    const handleErrors = (errors, background) => {
+      setErrors(errors); 
+      setBackground(background);
+    }
+  
     const insertUserInDb = () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
@@ -109,6 +118,7 @@ const Registration = ({ handleErrors }) => {
 
     return (
         <Main>
+            <Helptext content={errors} background={background} />
             <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">

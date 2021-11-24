@@ -32,11 +32,12 @@ const HelpSpan = styled.span`
 `
 
 const HelpTextContainer = styled.div`
-    position: ${props => props.opacity === 1 ? 'relative' : 'absolute'} ; 
     opacity: ${props => props.content === '' ? '0' : props.opacity};
     background-color: ${props => props.background};
     transition: opacity 1s;
     width: 100%;
     padding: 10px 0;
     text-align: center; 
+    position: absolute; 
+    top: 0; 
 `

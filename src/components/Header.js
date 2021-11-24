@@ -11,14 +11,13 @@ import DropdownMenu from "./DropdownMenu";
 import Login from "./Login";
 
 
-const Header = ({ handleErrors }) => {
+const Header = () => {
     const [datas, setDatas] = useState([]);
     const [dropdownClassname, setDropdownClassname] = useState('close');
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
-        .catch(() => handleErrors('Une erreur de réseau est apparue, veuillez réessayez plus tard.', '#D83A56'))
     }, [])
 
     const handleClickOnDropdownCategory = () => {
@@ -67,7 +66,7 @@ const Header = ({ handleErrors }) => {
                 </div>
 
                 <div className="user-connexion_container">
-                    <Login handleErrors={handleErrors} />
+                    <Login />
                 </div>
                 <DropdownMenu 
                 categories={datas} 
