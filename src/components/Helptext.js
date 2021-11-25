@@ -10,7 +10,7 @@ const Helptext = ({ content, background }) => {
 
             setTimeout(() => {
                 setOpen(false);
-            }, 4000)
+            }, 3000)
         }
     }, [content])
 

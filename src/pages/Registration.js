@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/registration.css';
 import styled from 'styled-components'; 
 import logo from '../images/logo_transparent.svg'
@@ -11,8 +11,10 @@ const Registration = () => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
-    const [errors, setErrors] = useState('');
-    const [background, setBackground] = useState('');
+    const [requestState, setRequestState] = useState({
+        content: '',
+        background:'transparent'
+    });
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
@@ -55,23 +57,25 @@ const Registration = () => {
     ];
   
 
-    const handleErrors = (errors, background) => {
-      setErrors(errors); 
-      setBackground(background);
+    const handleRequestState = (content, background) => {
+      setRequestState({ 
+          content: content,  
+          background: background
+        }); 
     }
   
     const insertUserInDb = () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
         .then(() =>{
-            handleErrors(`Bienvenue ${data.firstname}`, 'darkgreen')
+            handleRequestState(`Bienvenue ${data.firstname}`, 'darkgreen')
         })
         .catch((errors) => {
             // If error coming from server side validator bundle show to user, else show generic error
             if (errors.response.status === 422) {
-                handleErrors(errors.response.data.violations[0].message, '#D83A56')
+                handleRequestState(errors.response.data.violations[0].message, '#D83A56')
             } else {
-                handleErrors('Une erreur est apparu lors de la connexion au serveur, veuillez réésayer plus tard.', '#D83A56')
+                handleRequestState('Une erreur est apparu lors de la connexion au serveur, veuillez réésayer plus tard.', '#D83A56')
             }
         })
         .then(() => setUser([])); 
@@ -79,25 +83,27 @@ const Registration = () => {
 
     const handleInput = (e) => {
         setInputValue(e.target.value); 
-        handleErrors('', 'transparent')
+        handleRequestState('', 'transparent')
     }
+
+    useEffect(() => {
+        if (counter === 5) {
+            setCounter(0); 
+            return insertUserInDb(); 
+        }
+    }, [counter])
 
     const validate = () => {
         if((form[counter].pattern && !patternValidation()) || inputValue.length < 1) {
-            handleErrors('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
+            handleRequestState('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
             return; 
         } 
 
-        setCounter(counter +1)
         let key = form[counter].nameInDb
         setUser([...user, {[key] : inputValue}]);
         setInputValue(''); 
-        
-        if (counter === 4) {
-            setCounter(0); 
-            insertUserInDb(); 
-        }
-    }
+        setCounter(counter +1);
+    }        
 
     const patternValidation = () => {
         if(inputValue.match(form[counter].pattern)){
@@ -116,7 +122,7 @@ const Registration = () => {
 
     return (
         <Main>
-            <Helptext content={errors} background={background} />
+            <Helptext {...requestState} />
             <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">
