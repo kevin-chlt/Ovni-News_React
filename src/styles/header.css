@@ -224,14 +224,20 @@ header .link-logo{
         margin: 0;
         width: 100vw;
         flex-direction: column;
+        transition: all .3s;
+        display: flex;
     }
 
     .responsive-dropdown_open{
-        display: flex;    
+        height: 400px;   
+        z-index: 1; 
+        opacity: 1;
     }
 
     .responsive-dropdown_close{
-        display: none;
+        height: 0;
+        opacity: 0;
+        z-index: -10;
     }
 
     .responsive-text_container{

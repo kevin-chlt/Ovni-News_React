@@ -11,6 +11,8 @@ const Registration = () => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
+    const [errors, setErrors] = useState('');
+    const [background, setBackground] = useState('');
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
@@ -26,7 +28,6 @@ const Registration = () => {
             label: 'Mot de passe',
             nameInDb: 'password', 
             autocomplete: 'new-password'
-
         },
         {
             placeholder: 'Taper votre prénom',
@@ -52,8 +53,6 @@ const Registration = () => {
             autocomplete: 'bday'
         },
     ];
-    const [errors, setErrors] = useState('');
-    const [background, setBackground] = useState('')
   
 
     const handleErrors = (errors, background) => {
@@ -133,7 +132,7 @@ const Registration = () => {
                 <div className="input_container">
                     { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
                     <input type={form[counter].type} autoComplete={form[counter].autocomplete} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
-                    onChange={(e) => handleInput(e) } required/>
+                    onChange={(e) => handleInput(e)} required/>
                 </div>
                 <div className="btn-container">
                     {counter > 0 ? <button type="button" onClick={() => handlePreviousBtn() }> Précédent </button> : null} 
@@ -146,7 +145,7 @@ const Registration = () => {
     )
 }
 
-export default Registration
+export default Registration;
 
 const Main = styled.main`
     height: 100vh;

@@ -41,4 +41,5 @@ const HelpTextContainer = styled.div`
     text-align: center; 
     position: absolute; 
     top: 0; 
+    z-index: ${props => props.open ? '0' : '-1' };
 `

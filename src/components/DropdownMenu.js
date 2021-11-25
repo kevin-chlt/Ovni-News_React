@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 
-function DropdownMenu( { categories, dropdownState, handleClickOnDropdownCategory } ) {
+function DropdownMenu( { categories, open, handleDropdownClassname } ) {
 
     const categoriesLink = categories.map(category => {
         return (
             <li key={category.id} className="responsive-text_container">
-               <Link to={category.slug} className={`dropdown-text ${category.slug}_responsive`} onClick={() => handleClickOnDropdownCategory()} > {category.name}</Link>
+               <Link to={category.slug} className={`dropdown-text ${category.slug}_responsive`} onClick={() => handleDropdownClassname()} > {category.name}</Link>
             </li>
         )
     })
 
     return (
         <>
-            <ul className={`responsive-dropdown_${dropdownState} responsive_dropdown`} >
+            <ul className={`responsive-dropdown_${open ? 'open' : 'close'} responsive_dropdown`} >
                 {categoriesLink}
             </ul>
         </>

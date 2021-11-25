@@ -13,19 +13,15 @@ import Login from "./Login";
 
 const Header = () => {
     const [datas, setDatas] = useState([]);
-    const [dropdownClassname, setDropdownClassname] = useState('close');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
     }, [])
 
-    const handleClickOnDropdownCategory = () => {
-        setDropdownClassname('close'); 
-    }
-
-    const handleDropdownClassname = () => {
-        setDropdownClassname(dropdownClassname === 'close' ? 'open' : 'close');
+       const handleDropdownClassname = () => {
+        setDropdownOpen(!dropdownOpen);
     }
 
     const categories = datas.map(category => {
@@ -43,7 +39,7 @@ const Header = () => {
                         <img className="logo-header" src={logo} alt="logo" />
                     </Link>
                     <img onClick={() => handleDropdownClassname()} className="small-category_icon" src={dropdownMenu} alt="menu_des_categories"
-                    style={{transform: `${dropdownClassname === 'close' ? 'initial' : 'rotateZ(90deg)'}`}}
+                    style={{transform: `${!dropdownOpen ? 'initial' : 'rotateZ(90deg)'}`}}
                     />
                 </div>
 
@@ -68,10 +64,11 @@ const Header = () => {
                 <div className="user-connexion_container">
                     <Login />
                 </div>
+
                 <DropdownMenu 
                 categories={datas} 
-                dropdownState={dropdownClassname} 
-                handleClickOnDropdownCategory={handleClickOnDropdownCategory}
+                open={dropdownOpen} 
+                handleDropdownClassname={handleDropdownClassname}
                 />
                 
             </header>
