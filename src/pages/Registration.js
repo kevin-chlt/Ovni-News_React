@@ -115,7 +115,6 @@ const Registration = () => {
         setInputValue('');
     }
 
-
     return (
         <Main>
             <Helptext content={errors} background={background} />

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
+import Helptext from '../components/Helptext'
 
 
 const Login = () => {
@@ -29,6 +30,7 @@ const Login = () => {
 
     return (
         <>
+            <Helptext />
             <div className="user-connexion_form">
                 <input className="input" type="text" name="email" placeholder="Adresse email" onChange={(e) => setInputEmail(e.target.value)}/>
                 <input className="input" type="password" name="password" placeholder="Mot de passe" onChange={(e) => setInputPassword(e.target.value)} />

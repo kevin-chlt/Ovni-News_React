@@ -2,25 +2,26 @@ import React, { useState, useEffect }  from 'react'
 import styled from 'styled-components'
 
 const Helptext = ({ content, background }) => {
-    const [opacity, setOpacity] = useState(0); 
+    const [open, setOpen] = useState(false); 
 
     useEffect(() => {
         if(content !== '') {
-            setOpacity(1);
+            setOpen(true);
 
             setTimeout(() => {
-                setOpacity(0);
+                setOpen(false);
             }, 4000)
         }
     }, [content])
 
 
-    return (
-    <HelpTextContainer opacity={opacity} background={background} content={content}>
-        <HelpSpan>
-            {content}
-        </HelpSpan>
-    </HelpTextContainer>
+    return ( 
+        <HelpTextContainer open={open} background={background} content={content}>
+            <HelpSpan>
+                {content}
+            </HelpSpan>
+        </HelpTextContainer> 
+
     )
 }
 
@@ -32,7 +33,7 @@ const HelpSpan = styled.span`
 `
 
 const HelpTextContainer = styled.div`
-    opacity: ${props => props.content === '' ? '0' : props.opacity};
+    opacity: ${props => props.open ? '1' : '0'};
     background-color: ${props => props.background};
     transition: opacity 1s;
     width: 100%;
