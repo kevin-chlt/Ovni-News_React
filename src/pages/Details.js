@@ -24,46 +24,46 @@ const Details = ({ categoryId, articleId }) => {
 
     
     return (
+    mounted ?     
 <>
-    {mounted ?     
-<>
-<Main>
-    <ArticleWrapper>
-        <div className="article-title_container">
-            <h1> {data.title} </h1>
-        </div>
-        <div className="article-releaseDate_container">
-            <span>Publié le {new Date(data.publishedAt).toLocaleString('fr-FR')} </span>
-        </div>
-        <div className="article-describe_container">
-            <h2> {data.description} </h2>
-        </div>
-        <div className="article-img_container">
-            <img className="article-img_item" src={data.urlToImage} alt="image_article" />
-        </div>
-        <div className="article-btn-container">
-            <Link to={`/${data.category[0].slug}`}>
-                Retour
-            </Link>
-            <Link to={`/${data.category[0].slug}/${data.id -1}`} >
-                Precedent
-            </Link>
-            <Link to={`/${data.category[0].slug}/${data.id +1}`} >
-                Suivant
-            </Link>
-            <a href={data.externalLink} target="_blank" rel="noreferrer noopener">
-                Source
-            </a>
-        </div>
-    </ArticleWrapper>
-
+    <Main>
+        <ArticleWrapper>
+            <div className="article-title_container">
+                <h1> {data.title} </h1>
+            </div>
+            <div className="article-releaseDate_container">
+                <span>Publié le {new Date(data.publishedAt).toLocaleString('fr-FR')} </span>
+            </div>
+            <div className="article-describe_container">
+                <h2> {data.description} </h2>
+            </div>
+            <div className="article-img_container">
+                <img className="article-img_item" src={data.urlToImage} alt="image_article" />
+            </div>
+            <div className="article-btn-container">
+                <Link to={`/${data.category[0].slug}`}>
+                    Retour
+                </Link>
+                <Link to={`/${data.category[0].slug}/${data.id -1}`} >
+                    Precedent
+                </Link>
+                <Link to={`/${data.category[0].slug}/${data.id +1}`} >
+                    Suivant
+                </Link>
+                <a href={data.externalLink} target="_blank" rel="noreferrer noopener">
+                    Source
+                </a>
+            </div>
+        </ArticleWrapper>
+        
         <ArticlesComments />
+    </Main>
 
-</Main>
-<Footer />
+    <Footer />
 </>
-: <Loading /> }
-</>
+
+: <Loading /> 
+
     )
 }
 

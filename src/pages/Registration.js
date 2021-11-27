@@ -64,11 +64,51 @@ const Registration = () => {
         }); 
     }
   
+    const handleInput = (e) => {
+        setInputValue(e.target.value); 
+        handleRequestState('', 'transparent')
+    }
+
+    const handlePreviousBtn = () => {
+        setCounter(counter -1); 
+        let lastInfo = user[user.length === 0 ? user.length : user.length -1]; 
+        let newUser = user.filter(info => info !== lastInfo )
+        setUser(newUser)
+        setInputValue('');
+    }
+
+    const validate = () => {
+        if((form[counter].pattern && !patternValidation()) || inputValue.length < 1) {
+            handleRequestState('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
+            return; 
+        } 
+
+        let key = form[counter].nameInDb
+        setUser([...user, {[key] : inputValue}]);
+        setInputValue(''); 
+        setCounter(counter +1);
+    }
+          
+    useEffect(() => {
+        if (counter === 5) {
+            setCounter(0); 
+            insertUserInDb(); 
+        } 
+    }, [counter])
+
+    const patternValidation = () => {
+        if(inputValue.match(form[counter].pattern)){
+            return true; 
+        }
+        return false;
+    }
+
     const insertUserInDb = () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
         .then(() =>{
-            handleRequestState(`Bienvenue ${data.firstname}`, 'darkgreen')
+            handleRequestState(`Bienvenue ${data.firstname}`, 'darkgreen');
+            // Put the token in browser storage
         })
         .catch((errors) => {
             // If error coming from server side validator bundle show to user, else show generic error
@@ -81,44 +121,6 @@ const Registration = () => {
         .then(() => setUser([])); 
     }
 
-    const handleInput = (e) => {
-        setInputValue(e.target.value); 
-        handleRequestState('', 'transparent')
-    }
-
-    useEffect(() => {
-        if (counter === 5) {
-            setCounter(0); 
-            return insertUserInDb(); 
-        }
-    }, [counter])
-
-    const validate = () => {
-        if((form[counter].pattern && !patternValidation()) || inputValue.length < 1) {
-            handleRequestState('Le champs est invalide ! Veuillez vérifier le format utilisé.', '#D83A56')
-            return; 
-        } 
-
-        let key = form[counter].nameInDb
-        setUser([...user, {[key] : inputValue}]);
-        setInputValue(''); 
-        setCounter(counter +1);
-    }        
-
-    const patternValidation = () => {
-        if(inputValue.match(form[counter].pattern)){
-            return true; 
-        }
-        return false;
-    }
-
-    const handlePreviousBtn = () => {
-        setCounter(counter -1); 
-        let lastInfo = user[user.length === 0 ? user.length : user.length -1]; 
-        let newUser = user.filter(info => info !== lastInfo )
-        setUser(newUser)
-        setInputValue('');
-    }
 
     return (
         <Main>
@@ -136,8 +138,8 @@ const Registration = () => {
                 </div>
 
                 <div className="input_container">
-                    { inputValue.length >= 1 ? <label>{form[counter].label}</label> : null }
-                    <input type={form[counter].type} autoComplete={form[counter].autocomplete} value={inputValue} placeholder={form[counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
+                    { inputValue.length >= 1 ? <label>{form[counter >= 5 ? 0 : counter].label}</label> : null }
+                    <input type={form[counter >= 5 ? 0 : counter].type} autoComplete={form[counter >= 5 ? 0 : counter].autocomplete} value={inputValue} placeholder={form[counter >= 5 ? 0 : counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
                     onChange={(e) => handleInput(e)} required/>
                 </div>
                 <div className="btn-container">
