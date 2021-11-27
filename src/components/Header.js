@@ -11,14 +11,15 @@ import DropdownMenu from "./DropdownMenu";
 import Login from "./Login";
 
 
-const Header = () => {
+const Header = ({ handleRequestState }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
-    }, [])
+        .catch(errors => handleRequestState(errors.message))
+    }, [handleRequestState])
 
        const handleDropdownClassname = () => {
         setDropdownOpen(!dropdownOpen);
@@ -62,7 +63,7 @@ const Header = () => {
                 </div>
 
                 <div className="user-connexion_container">
-                    <Login />
+                    <Login handleRequestState={handleRequestState}/>
                 </div>
 
                 <DropdownMenu 

@@ -39,7 +39,7 @@ const HelpTextContainer = styled.div`
     width: 100%;
     padding: 10px 0;
     text-align: center; 
-    position: absolute; 
+    position: fixed; 
     top: 0; 
     z-index: ${props => props.open ? '0' : '-1' };
 `

@@ -1,24 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
-import Helptext from '../components/Helptext'
 
 
-const Login = () => {
+const Login = ({ handleRequestState }) => {
     const [inputEmail, setInputEmail] = useState(''); 
     const [inputPassword, setInputPassword] = useState('');
     const [userCredential, setUserCredential] = useState([]);
-    const [requestState, setRequestState] = useState({
-        content: '', 
-        background: 'transparent'
-    });
 
-    const handleRequestState = (content, background) => {
-        setRequestState({ 
-            content: content,  
-            background: background
-          }); 
-      }
 
     const getCredentials = () => {
         if(inputEmail.length <= 1 || inputPassword.length <= 1 ) {
@@ -31,7 +20,8 @@ const Login = () => {
         })
         .then((res) => {
             setUserCredential(res.data);
-            handleRequestState('Bienvenue '+ res.data.token, 'darkgreen')
+            localStorage.setItem('token', res.data.token)
+            handleRequestState('Bienvenue', 'dargreen')
         })
         .catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
@@ -50,11 +40,9 @@ const Login = () => {
         handleRequestState('', 'transparent')
     }
 
-
     return (
         <>
-            <Helptext {...requestState} />
-            <div className="user-connexion_form">
+            <div className="user-connexion_form" onKeyUp={(e) => e.key === 'Enter' ? getCredentials() : null}>
                 <input className="input" type="text" name="email" placeholder="Adresse email" onChange={(e) => handleEmail(e)} />
                 <input className="input" type="password" name="password" placeholder="Mot de passe" onChange={(e) => handlePassword(e)} />
             </div>

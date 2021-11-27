@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import '../styles/registration.css';
 import styled from 'styled-components'; 
 import logo from '../images/logo_transparent.svg'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Helptext from '../components/Helptext'
 
 
-const Registration = () => {
+const Registration = ({ handleRequestState }) => {
     const [counter, setCounter] = useState(0);
     const [inputValue, setInputValue] = useState('');
     const [user, setUser] = useState([]); 
-    const [requestState, setRequestState] = useState({
-        content: '',
-        background:'transparent'
-    });
     const form = [
         {
             placeholder: 'Entrer une adresse email valide',
@@ -56,14 +51,6 @@ const Registration = () => {
         },
     ];
   
-
-    const handleRequestState = (content, background) => {
-      setRequestState({ 
-          content: content,  
-          background: background
-        }); 
-    }
-  
     const handleInput = (e) => {
         setInputValue(e.target.value); 
         handleRequestState('', 'transparent')
@@ -87,14 +74,7 @@ const Registration = () => {
         setUser([...user, {[key] : inputValue}]);
         setInputValue(''); 
         setCounter(counter +1);
-    }
-          
-    useEffect(() => {
-        if (counter === 5) {
-            setCounter(0); 
-            insertUserInDb(); 
-        } 
-    }, [counter])
+    }  
 
     const patternValidation = () => {
         if(inputValue.match(form[counter].pattern)){
@@ -103,7 +83,7 @@ const Registration = () => {
         return false;
     }
 
-    const insertUserInDb = () => {
+    const insertUserInDb = useCallback( () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
         .then(() =>{
@@ -119,12 +99,19 @@ const Registration = () => {
             }
         })
         .then(() => setUser([])); 
-    }
+    }, [user, handleRequestState])
 
+              
+    useEffect(() => {
+        if (counter === 5) {
+            setCounter(0); 
+            insertUserInDb(); 
+        } 
+    }, [counter, insertUserInDb])
 
+ 
     return (
         <Main>
-            <Helptext {...requestState} />
             <div className="registration-form">
                 <div className="container_title">
                     <Link className="link-logo" to="/">
