@@ -14,6 +14,7 @@ import Login from "./Login";
 const Header = ({ handleRequestState }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [switchLoginFormToSubscribeLink, setSwitchLoginFormToSubscribeLink] = useState(true); 
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
@@ -56,15 +57,19 @@ const Header = ({ handleRequestState }) => {
                 <div className="user-panel_container">
                     <img className="user-picture_img" src={profilImageDefault} />
                 </div>
-*/}
-                <Link to="/registration" className="user-subscribe_link" id="subscribe-container">Inscrivez-vous</Link>
+*/}             {switchLoginFormToSubscribeLink ? 
+                <Link to="/registration" className="user-subscribe_link">Inscrivez-vous</Link>
+                : null }
+
                 <div className="small-connexion_container">
-                    <img src={switcherForm} className="small-connexion_icon" alt="image_form_switch" />
+                    <img src={switcherForm} onClick={() => setSwitchLoginFormToSubscribeLink(!switchLoginFormToSubscribeLink)} className="small-connexion_icon" alt="image_form_switch" />
                 </div>
 
+                {!switchLoginFormToSubscribeLink ? 
                 <div className="user-connexion_container">
                     <Login handleRequestState={handleRequestState}/>
                 </div>
+                : null }
 
                 <DropdownMenu 
                 categories={datas} 

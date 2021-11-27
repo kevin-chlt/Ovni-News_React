@@ -318,11 +318,6 @@ header .link-logo{
 }
 
 @media screen and (max-width: 900px){
-    /* Bloc utilisateur non connecté */
-    .user-connexion_container{
-        display: none;
-    }
-
     header{
         grid-template-columns: 20% 1fr 20%;
     }

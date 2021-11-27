@@ -17,27 +17,25 @@ const Login = ({ handleRequestState }) => {
         axios.post('https://localhost:8000/api/login_check', {
             username: inputEmail,
             password: inputPassword
-        })
-        .then((res) => {
+        }) .then((res) => {
             setUserCredential(res.data);
-            localStorage.setItem('token', res.data.token)
-            handleRequestState('Bienvenue', 'dargreen')
-        })
-        .catch(errors => {
+            localStorage.setItem('token', res.data.token);
+            handleRequestState('Bienvenue', 'dargreen');
+        }) .catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
-            handleRequestState(error, '#D83A56')
+            handleRequestState(error, '#D83A56');
         })
     }
 
     const handleEmail = (e) => {
         setInputEmail(e.target.value);
-        handleRequestState('', 'transparent')
+        handleRequestState('', 'transparent');
     }
 
 
     const handlePassword = (e) => {
         setInputPassword(e.target.value);
-        handleRequestState('', 'transparent')
+        handleRequestState('', 'transparent');
     }
 
     return (

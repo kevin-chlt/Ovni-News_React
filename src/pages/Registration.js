@@ -86,11 +86,11 @@ const Registration = ({ handleRequestState }) => {
     const insertUserInDb = useCallback( () => {
         const data = Object.assign({}, ...user);
         axios.post('https://127.0.0.1:8000/registration', {data})
-        .then(() =>{
+        .then(res =>{
             handleRequestState(`Bienvenue ${data.firstname}`, 'darkgreen');
-            // Put the token in browser storage
+            localStorage.setItem('token', res.data.token)
         })
-        .catch((errors) => {
+        .catch(errors => {
             // If error coming from server side validator bundle show to user, else show generic error
             if (errors.response.status === 422) {
                 handleRequestState(errors.response.data.violations[0].message, '#D83A56')
@@ -125,8 +125,8 @@ const Registration = ({ handleRequestState }) => {
                 </div>
 
                 <div className="input_container">
-                    { inputValue.length >= 1 ? <label>{form[counter >= 5 ? 0 : counter].label}</label> : null }
-                    <input type={form[counter >= 5 ? 0 : counter].type} autoComplete={form[counter >= 5 ? 0 : counter].autocomplete} value={inputValue} placeholder={form[counter >= 5 ? 0 : counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
+                    { inputValue.length >= 1 ? <label>{form[counter === 5 ? 0 : counter].label}</label> : null }
+                    <input type={form[counter === 5 ? 0 : counter].type} autoComplete={form[counter === 5 ? 0 : counter].autocomplete} value={inputValue} placeholder={form[counter === 5 ? 0 : counter].placeholder} onKeyUp={(e) => e.key === 'Enter' ? validate() : null } 
                     onChange={(e) => handleInput(e)} required/>
                 </div>
                 <div className="btn-container">
