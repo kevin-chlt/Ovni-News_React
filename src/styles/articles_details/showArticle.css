@@ -9,7 +9,7 @@
 .article-releaseDate_container{
     display: flex;
     justify-content: flex-end;
-    padding: 5px;
+    padding: 5px 20px;
 }
 
 .article-btn-container{

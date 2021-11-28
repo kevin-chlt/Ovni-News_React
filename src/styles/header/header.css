@@ -167,6 +167,10 @@ header .link-logo{
         grid-template-columns: 20% 1fr 20%;
     }
 
+    .header-logo_container {
+        justify-content: center;
+    }
+
     header .link-logo{
         height: 60px;
     }
@@ -188,10 +192,7 @@ header .link-logo{
         grid-template-columns: 25% 1fr 20%;
     }
 
-    header .link-logo{
-        width: 50px;
-        height: 45px;
-    }
+
 
     .user-profil_link, .userName_text  {
         font-size: 0.9rem;

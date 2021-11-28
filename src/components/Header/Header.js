@@ -1,13 +1,14 @@
 import React from "react";
-import '../../styles/header/header.css';
-import dropdownBurger from '../../images/align-justify.svg';
-//import profilImageDefault from '../images/male-default-profile-picture.jpg';
-import logo from '../../images/logo.svg';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import '../../styles/header/header.css';
+import dropdownBurger from '../../images/align-justify.svg';
+import logo from '../../images/logo.svg';
 import PublicPanel from "./PublicPanel";
 import DropdownMenu from "./DropdownMenu";
+//import profilImageDefault from '../images/male-default-profile-picture.jpg';
+
 
 
 const Header = ({ handleRequestState }) => {
@@ -39,8 +40,7 @@ const Header = ({ handleRequestState }) => {
                         <img className="logo-header" src={logo} alt="logo" />
                     </Link>
                     <img onClick={() => handleDropdownClassname()} className="small-category_icon" src={dropdownBurger} alt="menu_des_categories"
-                    style={{transform: `${!dropdownOpen ? 'initial' : 'rotateZ(90deg)'}`}}
-                    />
+                    style={{transform: `${!dropdownOpen ? 'initial' : 'rotateZ(90deg)'}`}} />
                 </div>
 
                 <nav className="header-nav">

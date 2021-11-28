@@ -41,8 +41,8 @@ const Login = ({ handleRequestState }) => {
     return (
         <>
             <div className="user-connexion_form" onKeyUp={(e) => e.key === 'Enter' ? getCredentials() : null}>
-                <input className="input" type="text" name="email" placeholder="Adresse email" onChange={(e) => handleEmail(e)} />
-                <input className="input" type="password" name="password" placeholder="Mot de passe" onChange={(e) => handlePassword(e)} />
+                <input type="text" name="email" placeholder="Adresse email" onChange={(e) => handleEmail(e)} />
+                <input type="password" name="password" placeholder="Mot de passe" onChange={(e) => handlePassword(e)} />
             </div>
             <div className="user-connexion_btn" role="button" tabIndex="0">
                 <img className="user-connexion_img" alt="bouton_de_connexion" src={loginBtn} onClick={() => getCredentials()}/>
