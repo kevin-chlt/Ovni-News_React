@@ -1,5 +1,5 @@
 import React from 'react'
-import submitCommentImage from '../images/arrow-circle-right_pageArticle.svg';
+import submitCommentImage from '../../images/arrow-circle-right_pageArticle.svg';
 import styled from 'styled-components';
 
 

@@ -1,6 +1,6 @@
 import { Routes, Route, useParams } from "react-router-dom";
 import { useCallback, useState } from "react";
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import Accueil from './pages/Accueil';
 import Articles from "./pages/Articles";
 import Details from "./pages/Details";

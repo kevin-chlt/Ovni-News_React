@@ -1,6 +1,6 @@
 import React from 'react'
-import '../styles/articleList.css'
-import GetArticlesList from '../components/GetArticlesList'
+import '../styles/articles_list/article_list.css'
+import GetArticlesList from '../components/Articles_list/GetArticlesList'
 import styled from 'styled-components'; 
 import { useEffect, useState } from 'react';
 import axios from 'axios';

@@ -1,0 +1,75 @@
+.responsive-dropdown_close, .responsive-dropdown_open {
+    display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    
+    .responsive_dropdown{
+        grid-row: 2;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        flex-direction: column;
+        transition: all .3s;
+        display: flex;
+    }
+
+    .responsive-dropdown_open{
+        height: 400px;   
+        z-index: 1; 
+        opacity: 1;
+    }
+
+    .responsive-dropdown_close{
+        height: 0;
+        opacity: 0;
+        z-index: -10;
+    }
+
+    .responsive-text_container{
+        border-bottom: inherit;
+        display: flex;
+        justify-content: center;
+        margin: 2px 0;
+    }
+
+    .dropdown-text{
+        color: #2a2929;
+        font-weight: bold;
+        font-style: italic;
+        font-size: 20px;
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+        border: 0;
+    }
+
+    .general_responsive, .general:hover{
+        background-color: #d2f1ef;
+    }
+
+    .business_responsive, .business:hover {
+        background: #81aefd;
+    }
+
+    .science_responsive, .science:hover{
+        background: #e7ffb9;
+    }
+
+    .technology_responsive, .technology:hover{
+        background: #8ecdae;
+    }
+
+    .health_responsive, .health:hover{
+        background: #fcbb9b;
+    }
+
+    .sports_responsive, .sports:hover{
+        background: #b0fdb2;
+    }
+
+    .entertainment_responsive, .entertainment:hover{
+        background: #d6d1fd;
+    }
+
+}

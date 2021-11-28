@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import '../styles/showArticle.css';
+import '../styles/articles_details/showArticle.css';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import { Link } from 'react-router-dom'
-import ArticlesComments from '../components/ArticlesComments';
+import ArticlesComments from '../components/Articles_details/ArticlesComments';
 
 
 const Details = ({ categoryId, articleId }) => {

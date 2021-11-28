@@ -1,0 +1,199 @@
+/*
+@font-face {
+    font-family: "Otomanopee One";
+    src: url("../fonts/OtomanopeeOne-Regular.ttf")
+}
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf")
+}
+*/
+
+header{
+    display: grid;
+    grid-template-columns: 7% 40% 20% 1fr;
+    margin-bottom: 15px;
+}
+/* LOGO */
+.header-logo_container{
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+header .link-logo{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* CATEGORY */
+.header-nav{
+    display: flex;
+    align-items: center;
+}
+
+.header-nav_link{
+    transition: 0.3s;
+    width: 100%;
+    font-family: Otomanopee One, sans-serif;
+    text-align: center;
+    padding: 15px 5px;
+    color: #D83A56;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.header-nav_link:hover{
+    color: #ffffff;
+}
+
+/* BORDURE BOUTON & ANIMATION COULEUR CATEGORIE */
+.entertainment {
+    border-bottom: #B4AEE8 4px solid;
+}
+.entertainment:hover{
+    background: #B4AEE8;
+
+}
+.general{
+    border-bottom: 4px solid #98DED9;
+}
+.general:hover{
+    background: #98DED9;
+}
+.science{
+    border-bottom: 4px solid #9DAD7F;
+}
+.science:hover{
+    background: #9DAD7F;
+}
+.technology{
+    border-bottom: 4px solid #B4846C;
+}
+.technology:hover{
+    background: #B4846C;
+}
+.health{
+    border-bottom: #185ADB 4px solid;
+}
+.health:hover{
+    background: #185ADB;
+}
+.business{
+    border-bottom: #1B1A17 4px solid;
+}
+.business:hover {
+    background: #1B1A17;
+}
+.sports{
+    border-bottom: #9FE6A0 4px solid;
+}
+.sports:hover {
+    background: #9FE6A0;
+}
+
+
+/* PARTIE UTILISATEUR */
+.user-board_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.userName_text{
+    font-weight: bold;
+    font-size: 18px;
+    color: #D83A56;
+    margin-bottom: 3px;
+}
+
+.user-profil_link{
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #D83A56;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.user-panel_container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-picture_img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: #000000 1px solid;
+}
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1400px) {
+    /* Bloc utilisateur non connecté */
+    header {
+        grid-template-columns: 20% 1fr 30%;
+        margin-bottom: 0;
+    }
+
+    .header-nav {
+        display: none;
+    }
+
+    .header-logo_container {
+        grid-column: 1;
+    }
+
+    .small-category_icon, header .link-logo{
+        height: 70px;
+        width: 70px;
+        display: flex;
+    }
+
+    .header-nav_link {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 900px){
+    header{
+        grid-template-columns: 20% 1fr 20%;
+    }
+
+    header .link-logo{
+        height: 60px;
+    }
+
+    /* Bloc Utilisateur connecté */
+    .user-board_container{
+        grid-column: 2;
+    }
+
+    .user-picture_img{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    /* Bloc utilisateur connecté */
+    header{
+        grid-template-columns: 25% 1fr 20%;
+    }
+
+    header .link-logo{
+        width: 50px;
+        height: 45px;
+    }
+
+    .user-profil_link, .userName_text  {
+        font-size: 0.9rem;
+    }
+}

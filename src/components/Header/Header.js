@@ -1,20 +1,18 @@
 import React from "react";
-import '../styles/header.css';
-import dropdownMenu from '../images/align-justify.svg';
+import '../../styles/header/header.css';
+import dropdownBurger from '../../images/align-justify.svg';
 //import profilImageDefault from '../images/male-default-profile-picture.jpg';
-import switcherForm from '../images/house-user.svg';
-import logo from '../images/logo.svg';
+import logo from '../../images/logo.svg';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PublicPanel from "./PublicPanel";
 import DropdownMenu from "./DropdownMenu";
-import Login from "./Login";
 
 
 const Header = ({ handleRequestState }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [switchLoginFormToSubscribeLink, setSwitchLoginFormToSubscribeLink] = useState(true); 
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
@@ -40,7 +38,7 @@ const Header = ({ handleRequestState }) => {
                     <Link className="link-logo" to="/">
                         <img className="logo-header" src={logo} alt="logo" />
                     </Link>
-                    <img onClick={() => handleDropdownClassname()} className="small-category_icon" src={dropdownMenu} alt="menu_des_categories"
+                    <img onClick={() => handleDropdownClassname()} className="small-category_icon" src={dropdownBurger} alt="menu_des_categories"
                     style={{transform: `${!dropdownOpen ? 'initial' : 'rotateZ(90deg)'}`}}
                     />
                 </div>
@@ -57,20 +55,11 @@ const Header = ({ handleRequestState }) => {
                 <div className="user-panel_container">
                     <img className="user-picture_img" src={profilImageDefault} />
                 </div>
-*/}             {switchLoginFormToSubscribeLink ? 
-                <Link to="/registration" className="user-subscribe_link">Inscrivez-vous</Link>
-                : null }
+*/}
 
-                <div className="small-connexion_container">
-                    <img src={switcherForm} onClick={() => setSwitchLoginFormToSubscribeLink(!switchLoginFormToSubscribeLink)} className="small-connexion_icon" alt="image_form_switch" />
-                </div>
+                <PublicPanel handleRequestState={handleRequestState} />
 
-                {!switchLoginFormToSubscribeLink ? 
-                <div className="user-connexion_container">
-                    <Login handleRequestState={handleRequestState}/>
-                </div>
-                : null }
-
+                
                 <DropdownMenu 
                 categories={datas} 
                 open={dropdownOpen} 
@@ -82,5 +71,4 @@ const Header = ({ handleRequestState }) => {
 }
 
 export default Header;
-
 

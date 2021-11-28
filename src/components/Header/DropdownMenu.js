@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import "../../styles/header/dropdown_responsive.css";
 
 
-function DropdownMenu( { categories, open, handleDropdownClassname } ) {
+const DropdownMenu = ( { categories, open, handleDropdownClassname } ) => {
 
     const categoriesLink = categories.map(category => {
         return (

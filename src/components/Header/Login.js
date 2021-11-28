@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import loginBtn from '../images/arrow-circle-right_pageArticle.svg';
+import loginBtn from '../../images/arrow-circle-right_pageArticle.svg';
 
 
 const Login = ({ handleRequestState }) => {
@@ -17,11 +17,11 @@ const Login = ({ handleRequestState }) => {
         axios.post('https://localhost:8000/api/login_check', {
             username: inputEmail,
             password: inputPassword
-        }) .then((res) => {
+        }).then((res) => {
             setUserCredential(res.data);
             localStorage.setItem('token', res.data.token);
             handleRequestState('Bienvenue', 'dargreen');
-        }) .catch(errors => {
+        }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
             handleRequestState(error, '#D83A56');
         })
