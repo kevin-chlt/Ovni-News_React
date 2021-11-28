@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import PublicPanel from "./PublicPanel";
+import DropdownMenu from "./DropdownMenu";
 import '../../styles/header/header.css';
 import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
-import PublicPanel from "./PublicPanel";
-import DropdownMenu from "./DropdownMenu";
 //import profilImageDefault from '../images/male-default-profile-picture.jpg';
 
 
@@ -58,7 +57,6 @@ const Header = ({ handleRequestState }) => {
 */}
 
                 <PublicPanel handleRequestState={handleRequestState} />
-
                 
                 <DropdownMenu 
                 categories={datas} 

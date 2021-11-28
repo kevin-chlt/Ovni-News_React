@@ -151,7 +151,7 @@ header .link-logo{
         grid-column: 1;
     }
 
-    .small-category_icon, header .link-logo{
+    header .link-logo{
         height: 70px;
         width: 70px;
         display: flex;
@@ -192,7 +192,10 @@ header .link-logo{
         grid-template-columns: 25% 1fr 20%;
     }
 
-
+    header .link-logo{
+        height: 50px;
+        width:40px;
+    }
 
     .user-profil_link, .userName_text  {
         font-size: 0.9rem;

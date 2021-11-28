@@ -52,7 +52,7 @@
     width: 50px;
 }
 
-.small-switchIcon_container, .small-category_icon {
+.small-switchIcon_container {
     display: none;
 }
 
@@ -88,7 +88,7 @@
         cursor: pointer;
     }
 
-    .small-category_icon, .small-connexion_icon{
+    .small-connexion_icon{
         height: 60px;
     }
 
@@ -97,7 +97,6 @@
     }
 
     .user-connexion_form{
-        align-items: center;
         width: 60%;
     }
 }
