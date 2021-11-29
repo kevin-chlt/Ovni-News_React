@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
-const FiltersByAuthors = ({ handleClickAuthor }) => {
+
+const FiltersByAuthors = () => {
     const [authorsList, setAuthorsList] = useState([]); 
+    let navigation = useNavigate();
 
     useEffect(() => {
         axios.get(`https://127.0.0.1:8000/authors/`)
@@ -10,6 +13,10 @@ const FiltersByAuthors = ({ handleClickAuthor }) => {
             setAuthorsList(res.data);
         })
     }, [])
+    
+    const handleClickAuthor = (key) => {
+        return navigation(`../authors/${key}`, {replace: false})
+    }
 
     const displayAuthorsList = authorsList.map(author => {
         return (
@@ -19,7 +26,7 @@ const FiltersByAuthors = ({ handleClickAuthor }) => {
 
     return (
         <>
-        <option value="0">Choissisez une source</option>
+        <option value="0" onClick={() => navigation('/articles/general')} >Choissisez une source</option>
             {displayAuthorsList}
         </>
     )

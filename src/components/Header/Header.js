@@ -26,7 +26,7 @@ const Header = ({ handleRequestState }) => {
 
     const categories = datas.map(category => {
         return (
-            <Link key={category.id} className={`header-nav_link ${category.slug}`} to={`/${category.slug}`} >
+            <Link key={category.id} className={`header-nav_link ${category.slug}`} to={`/articles/${category.slug}`} >
                 {category.name}
             </Link>
         );

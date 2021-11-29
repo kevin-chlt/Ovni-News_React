@@ -9,18 +9,18 @@ import { Link } from 'react-router-dom'
 import ArticlesComments from '../components/Articles_details/ArticlesComments';
 
 
-const Details = ({ categoryId, articleId }) => {
+const Details = ({ articleId }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/${categoryId}/${articleId}`)
+        axios.get(`https://127.0.0.1:8000/articles/details/${articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
         })
         return () => setMounted(false)
-    }, [categoryId, articleId])
+    }, [articleId])
 
     
     return (
@@ -41,13 +41,13 @@ const Details = ({ categoryId, articleId }) => {
                 <img className="article-img_item" src={data.urlToImage} alt="image_article" />
             </div>
             <div className="article-btn-container">
-                <Link to={`/${data.category[0].slug}`}>
+                <Link to={`/articles/${data.category[0].slug}`}>
                     Retour
                 </Link>
-                <Link to={`/${data.category[0].slug}/${data.id -1}`} >
+                <Link to={`/articles/${data.category[0].slug}/${data.id -1}`} >
                     Precedent
                 </Link>
-                <Link to={`/${data.category[0].slug}/${data.id +1}`} >
+                <Link to={`/articles/${data.category[0].slug}/${data.id +1}`} >
                     Suivant
                 </Link>
                 <a href={data.externalLink} target="_blank" rel="noreferrer noopener">

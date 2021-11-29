@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios";
-import '../styles/articles_list/article_list.css'
-import GetArticlesList from '../components/Articles_list/GetArticlesList'
-import styled from 'styled-components'; 
-import Footer from '../components/Footer';
-import FiltersByAuthors from '../components/Articles_list/FiltersByAuthors';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import GetArticlesList from '../components/Articles_list/GetArticlesList';
 import Loading from '../components/Loading';
+import styled from 'styled-components'; 
+import FiltersByAuthors from '../components/Articles_list/FiltersByAuthors';
+import Footer from '../components/Footer';
 
 
-const Articles = ({ categoryId }) => {
-    const [data, setData] = useState([]);
+const Authors = ({ authorId }) => {
+    const [data,setData] = useState([]);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/${categoryId}`)
+        axios.get(`https://127.0.0.1:8000/authors/${authorId}`)
         .then(res => {
-            setData(res.data);
-            setMounted(true);
-        });
+            setData(res.data); 
+            setMounted(true); 
+        })
         return () => {
-            setMounted(false) 
+            setMounted(false); 
         }
-    }, [categoryId])
+    }, [authorId])
+
 
     return (
-    <>
-    <Main>
+        <>
+        <Main>
         <FiltersWrapper>
             <div className="container-filter_nbrPerPage">
                 <select name="limit">
@@ -49,10 +49,13 @@ const Articles = ({ categoryId }) => {
     </Main>
     <Footer />
     </>
+
+
+
     )
 }
 
-export default Articles
+export default Authors
 
 const Main = styled.main`
     background: #FFF; 

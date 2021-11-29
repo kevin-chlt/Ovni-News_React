@@ -7,6 +7,7 @@ import Details from "./pages/Details";
 import Registration from "./pages/Registration";
 import Helptext from './components/Helptext'
 import './components/AxiosInterceptor';
+import Authors from "./pages/Authors";
 
 
 export default function App() {
@@ -28,9 +29,10 @@ export default function App() {
     <Header handleRequestState={handleRequestState}/>
       
     <Routes>
-        <Route path="/registration" element={<Registration handleRequestState={handleRequestState}/>} />
-        <Route path="/:categoryId/:articleId" element={<ChildTwo />} />
-        <Route path="/:categoryId" element={<Child />} />
+        <Route path="authors/:authorId" element={<Child />} />
+        <Route path="registration" element={<Registration handleRequestState={handleRequestState}/>} />
+        <Route path="articles/:categoryId/:articleId" element={<ChildTwo />} />
+        <Route path="articles/:categoryId" element={<Child />} />
         <Route path="/" element={<Accueil />} />
     </Routes>
   </>
@@ -40,10 +42,20 @@ export default function App() {
 
 function Child() {
   let  params = useParams(); 
-  return (
-      <Articles category={params.categoryId} />
-  )
+
+  if(params.categoryId){
+      return (
+      <Articles categoryId={params.categoryId} />
+    )
+  }
+
+  if(params.authorId) {
+    return (
+      <Authors authorId={params.authorId} />
+    )
+  }
 }
+
 
 function ChildTwo () {
   let params = useParams(); 

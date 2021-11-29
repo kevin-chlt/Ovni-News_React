@@ -28,36 +28,36 @@ const Accueil = () => {
     <div className="category-container">
 
         <div className="category-list_container">
-            <Link to="/general" >
+            <Link to="/articles/general" >
                  <img className="category-list_img" alt="image_category" src={general}/>
                 <span className="category-list_link">Général</span>
             </Link>    
-            <Link to="/business" >
+            <Link to="/articles/business" >
                 <img className="category-list_img" alt="image_category" src={business}/>
                 <span className="category-list_link">Economie</span>
             </Link>    
-            <Link to="/sports" >
+            <Link to="/articles/sports" >
                 <img className="category-list_img" alt="image_category" src={sports}/>
                 <span className="category-list_link">Sport</span>
             </Link> 
         </div> 
 
         <div className="category-list_container">
-            <Link to="/entertainment" >
+            <Link to="/articles/entertainment" >
                 <img className="category-list_img" alt="image_category" src={entertainment}/>
                 <span className="category-list_link">People</span>
             </Link>    
-            <Link to="/health" >
+            <Link to="/articles/health" >
                 <img className="category-list_img" alt="image_category" src={health}/>
                <span className="category-list_link">Santé</span>
             </Link>    
-            <Link to="/science" >
+            <Link to="/articles/science" >
                 <img className="category-list_img" alt="image_category" src={science}/>
                 <span className="category-list_link">Science</span>
             </Link>    
-            <Link to="/technology" >
+            <Link to="/articles/technology" >
                 <img className="category-list_img" alt="image_category" src={technology}/>
-               <span className="category-list_link">Technologie</span>
+                <span className="category-list_link">Technologie</span>
             </Link> 
         </div>  
     </div>
