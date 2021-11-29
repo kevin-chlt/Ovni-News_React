@@ -11,6 +11,7 @@ const Authors = ({ authorId }) => {
     const [data,setData] = useState([]);
     const [mounted, setMounted] = useState(false);
 
+
     useEffect(() => {
         axios.get(`https://127.0.0.1:8000/authors/${authorId}`)
         .then(res => {
@@ -26,32 +27,28 @@ const Authors = ({ authorId }) => {
     return (
         <>
         <Main>
-        <FiltersWrapper>
-            <div className="container-filter_nbrPerPage">
-                <select name="limit">
-                    <option value="0">Nombre d'articles</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
-           <div>
-               <select name="author">
-                    <FiltersByAuthors />
-               </select>
-           </div>
-        </FiltersWrapper>
-        
-        { mounted ? <GetArticlesList data={data} /> : <Loading /> }
+            <FiltersWrapper>
+                <div className="container-filter_nbrPerPage">
+                    <select>
+                        <option value="0">Nombre d'articles</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div>
+                    <select>
+                        <FiltersByAuthors />
+                    </select>
+                </div>
+            </FiltersWrapper>
 
-    </Main>
-    <Footer />
+            { mounted ? <GetArticlesList data={data} /> : <Loading /> }
+        </Main>
+        <Footer />
     </>
-
-
-
     )
 }
 
@@ -63,7 +60,8 @@ const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 70vh;
+    min-height: 75vh;
+    position: relative;
 `
 
 const FiltersWrapper = styled.aside`

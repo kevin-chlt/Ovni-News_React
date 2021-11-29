@@ -15,7 +15,7 @@ const FiltersByAuthors = () => {
     }, [])
     
     const handleClickAuthor = (key) => {
-        return navigation(`../authors/${key}`, {replace: false})
+        return navigation(`../authors/${key}`)
     }
 
     const displayAuthorsList = authorsList.map(author => {
@@ -32,4 +32,4 @@ const FiltersByAuthors = () => {
     )
 }
 
-export default FiltersByAuthors
+export default FiltersByAuthors;

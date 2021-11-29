@@ -54,6 +54,7 @@ const Articles = ({ categoryId }) => {
 
 export default Articles
 
+
 const Main = styled.main`
     background: #FFF; 
     padding: 10px;
