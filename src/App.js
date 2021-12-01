@@ -33,7 +33,7 @@ export default function App() {
         <Route path="registration" element={<Registration handleRequestState={handleRequestState}/>} />
         <Route path="articles/details/:articleId" element={<ChildTwo />} />
         <Route path="articles/:categoryId" element={<Child />} />
-        <Route path="/" element={<Accueil />} />
+        <Route path="*" element={<Accueil />} />
     </Routes>
   </>
       )

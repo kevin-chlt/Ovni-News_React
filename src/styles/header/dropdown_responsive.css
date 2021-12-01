@@ -20,7 +20,7 @@
     }
 
     .responsive-dropdown_open{
-        height: 380px;   
+        height: 400px;   
         z-index: 1; 
         opacity: 1;
     }

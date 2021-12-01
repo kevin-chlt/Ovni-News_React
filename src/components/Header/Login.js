@@ -20,7 +20,7 @@ const Login = ({ handleRequestState }) => {
         }).then((res) => {
             setUserCredential(res.data);
             localStorage.setItem('token', res.data.token);
-            handleRequestState('Bienvenue', 'dargreen');
+            handleRequestState('Bienvenue', 'darkgreen');
         }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
             handleRequestState(error, '#D83A56');
@@ -31,7 +31,6 @@ const Login = ({ handleRequestState }) => {
         setInputEmail(e.target.value);
         handleRequestState('', 'transparent');
     }
-
 
     const handlePassword = (e) => {
         setInputPassword(e.target.value);

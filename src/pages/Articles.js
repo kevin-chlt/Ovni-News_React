@@ -11,7 +11,7 @@ import Loading from '../components/Loading';
 const Articles = ({ categoryId }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
-    const [offset, setOffset] = useState(20); 
+    const [itemsPerPage, setItemsPerPage] = useState(20); 
 
     useEffect(() => {
         axios.get(`https://127.0.0.1:8000/articles/${categoryId}`)
@@ -24,12 +24,20 @@ const Articles = ({ categoryId }) => {
         }
     }, [categoryId])
 
+    const handleItemPerPage = (value) => {
+        setItemsPerPage(value)
+        
+        if(value === '0') {
+            setItemsPerPage(20); 
+        }
+    }
+
     return (
     <>
     <Main>
         <FiltersWrapper>
             <div className="container-filter_nbrPerPage">
-                <select onChange={(e) => setOffset(e.target.value)}>
+                <select value={itemsPerPage} onChange={(e) => handleItemPerPage(e.target.value)}>
                     <option value="0">Nombre d'articles</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
@@ -45,7 +53,7 @@ const Articles = ({ categoryId }) => {
            </div>
         </FiltersWrapper>
         
-        { mounted ? <GetArticlesList data={data.slice(0, offset)} /> : <Loading /> }
+        { mounted ? <GetArticlesList data={data.slice(0, itemsPerPage)}  itemPerPage={itemsPerPage} /> : <Loading /> }
 
     </Main>
     <Footer />

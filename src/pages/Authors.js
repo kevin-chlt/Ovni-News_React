@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 const Authors = ({ authorId }) => {
     const [data,setData] = useState([]);
     const [mounted, setMounted] = useState(false);
-    const [offset, setOffset] = useState(20);
+    const [itemsPerPage, setItemsPerPage] = useState(20);
 
 
     useEffect(() => {
@@ -24,13 +24,21 @@ const Authors = ({ authorId }) => {
         }
     }, [authorId])
 
+    const handleItemPerPage = (value) => {
+        setItemsPerPage(value)
+        
+        if(value === '0') {
+            setItemsPerPage(20); 
+        }
+    }
 
+    
     return (
         <>
         <Main>
             <FiltersWrapper>
                 <div className="container-filter_nbrPerPage">
-                    <select onChange={(e => setOffset(e.target.value))}>
+                    <select value={itemsPerPage} onChange={(e => handleItemPerPage(e.target.value))}>
                         <option value="0">Nombre d'articles</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -46,7 +54,7 @@ const Authors = ({ authorId }) => {
                 </div>
             </FiltersWrapper>
 
-            { mounted ? <GetArticlesList data={data.slice(0, offset)} /> : <Loading /> }
+            { mounted ? <GetArticlesList data={data.slice(0, itemsPerPage)} itemPerPage={itemsPerPage} /> : <Loading /> }
         </Main>
         <Footer />
     </>
