@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import '../styles/articles_list/article_list.css'
+import '../styles/articles_list/article_list.css'; 
+import '../styles/articles_list/filters.css'; 
 import GetArticlesList from '../components/Articles_list/GetArticlesList'
 import styled from 'styled-components'; 
 import Footer from '../components/Footer';
@@ -24,6 +25,7 @@ const Articles = ({ categoryId }) => {
         }
     }, [categoryId])
 
+
     const handleItemPerPage = (value) => {
         setItemsPerPage(value)
         
@@ -39,6 +41,7 @@ const Articles = ({ categoryId }) => {
             <div className="container-filter_nbrPerPage">
                 <select value={itemsPerPage} onChange={(e) => handleItemPerPage(e.target.value)}>
                     <option value="0">Nombre d'articles</option>
+                    <option value="5"> 5 </option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -47,13 +50,13 @@ const Articles = ({ categoryId }) => {
                 </select>
             </div>
            <div>
-               <select>
+               <select className="authors_selector">
                     <FiltersByAuthors />
                </select>
            </div>
         </FiltersWrapper>
         
-        { mounted ? <GetArticlesList data={data.slice(0, itemsPerPage)}  itemPerPage={itemsPerPage} /> : <Loading /> }
+        { mounted ? <GetArticlesList data={data} itemsPerPage={parseInt(itemsPerPage)} /> : <Loading /> }
 
     </Main>
     <Footer />

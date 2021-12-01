@@ -1,9 +1,3 @@
-.container-filter_nbrPerPage{
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .container-filter_nbrPerPage label{
     font-family: Open-Sans, serif;
@@ -49,22 +43,6 @@
     height: 100px;
 }
 
-.pagination-container{
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.pagination-container a {
-    margin-right: 3px;
-    text-decoration: none;
-    color: #D83A56;
-    font-size: 1.3rem;
-}
-
-.pagination-container a:hover{
-    font-size: 1.5rem;
-}
 
 .btn-retour_text{
     transition: 0.3s;
@@ -87,15 +65,6 @@
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 950px) {
-    .container-filter_nbrPerPage{
-        flex-direction: row;
-        margin-right: 0;
-    }
-
-    .container-filter_nbrPerPage label{
-        margin-right: 10px;
-    }
-
     .container-list{
         width: 100%;
         height: auto;
@@ -116,10 +85,6 @@
     .btn-retour_text{
         font-size: 0.9rem;
     }
-
-    .pagination-container a{
-        font-size: 1.1rem;
-    }
 }
 
 @media screen and (max-width: 720px){
@@ -129,10 +94,6 @@
 }
 
 @media screen and (max-width: 550px) {
-    #authorLink {
-        width: 170px;
-    }
-
     .container-list:hover{
         font-weight: normal;
     }
