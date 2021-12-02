@@ -40,6 +40,7 @@ const Authors = ({ authorId }) => {
                 <div className="container-filter_nbrPerPage">
                     <select value={itemsPerPage} onChange={(e => handleItemPerPage(e.target.value))}>
                         <option value="0">Nombre d'articles</option>
+                        <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -54,7 +55,7 @@ const Authors = ({ authorId }) => {
                 </div>
             </FiltersWrapper>
 
-            { mounted ? <GetArticlesList data={data.slice(0, itemsPerPage)} itemPerPage={itemsPerPage} /> : <Loading /> }
+            { mounted ? <GetArticlesList data={data} itemsPerPage={parseInt(itemsPerPage)} /> : <Loading /> }
         </Main>
         <Footer />
     </>

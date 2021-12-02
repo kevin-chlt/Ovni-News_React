@@ -8,6 +8,7 @@ import Registration from "./pages/Registration";
 import Helptext from './components/Helptext'
 import './components/AxiosInterceptor';
 import Authors from "./pages/Authors";
+import Authentification from "./components/Auth/Authentification";
 
 
 export default function App() {
@@ -22,6 +23,9 @@ export default function App() {
         background: background
       }); 
   }, [])
+
+  const user = Authentification.getCurrentUser(); 
+  console.log(user); 
 
     return (
   <>

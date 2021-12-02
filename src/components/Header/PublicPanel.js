@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 const PublicPanel = ({ handleRequestState }) => {
-    const [switchState, setSwitchState] = useState(false); 
+    const [switchState, setSwitchState] = useState(true); 
 
     return (
         <>

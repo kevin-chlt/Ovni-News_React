@@ -3,20 +3,27 @@ import styled from 'styled-components'
 
 const Helptext = ({ content, background }) => {
     const [open, setOpen] = useState(false); 
+    const [display, setDisplay] = useState(false); 
 
     useEffect(() => {
         if(content !== '') {
             setOpen(true);
+            setDisplay(true); 
 
             setTimeout(() => {
                 setOpen(false);
+
+                setTimeout(() => {
+                    setDisplay(false)
+                }, 1100)
+                
             }, 3000)
         }
     }, [content])
 
 
     return ( 
-        <HelpTextContainer open={open} background={background} content={content}>
+        <HelpTextContainer open={open} background={background} display={display}>
             <HelpSpan>
                 {content}
             </HelpSpan>
@@ -41,5 +48,5 @@ const HelpTextContainer = styled.div`
     text-align: center; 
     position: fixed; 
     top: 0; 
-    z-index: ${props => props.open ? '0' : '-1' };
+    z-index: ${props =>  props.display ? '1' :  '-1' };
 `

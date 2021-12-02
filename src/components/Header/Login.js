@@ -19,7 +19,7 @@ const Login = ({ handleRequestState }) => {
             password: inputPassword
         }).then((res) => {
             setUserCredential(res.data);
-            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('token', userCredential.token);
             handleRequestState('Bienvenue', 'darkgreen');
         }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
