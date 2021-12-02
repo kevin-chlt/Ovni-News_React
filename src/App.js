@@ -6,9 +6,8 @@ import Articles from "./pages/Articles";
 import Details from "./pages/Details";
 import Registration from "./pages/Registration";
 import Helptext from './components/Helptext'
-import './components/AxiosInterceptor';
+import './components/Auth/AxiosInterceptor';
 import Authors from "./pages/Authors";
-import Authentification from "./components/Auth/Authentification";
 
 
 export default function App() {
@@ -24,9 +23,7 @@ export default function App() {
       }); 
   }, [])
 
-  const user = Authentification.getCurrentUser(); 
-  console.log(user); 
-
+  
     return (
   <>
     <Helptext {...requestState} />

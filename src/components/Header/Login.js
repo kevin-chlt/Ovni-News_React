@@ -6,8 +6,6 @@ import loginBtn from '../../images/arrow-circle-right_pageArticle.svg';
 const Login = ({ handleRequestState }) => {
     const [inputEmail, setInputEmail] = useState(''); 
     const [inputPassword, setInputPassword] = useState('');
-    const [userCredential, setUserCredential] = useState([]);
-
 
     const getCredentials = () => {
         if(inputEmail.length <= 1 || inputPassword.length <= 1 ) {
@@ -18,8 +16,7 @@ const Login = ({ handleRequestState }) => {
             username: inputEmail,
             password: inputPassword
         }).then((res) => {
-            setUserCredential(res.data);
-            localStorage.setItem('token', userCredential.token);
+            localStorage.setItem('token', res.data.token);
             handleRequestState('Bienvenue', 'darkgreen');
         }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';

@@ -17,13 +17,13 @@ const Helptext = ({ content, background }) => {
                     setDisplay(false)
                 }, 1100)
                 
-            }, 3000)
+            }, 4000)
         }
     }, [content])
 
 
     return ( 
-        <HelpTextContainer open={open} background={background} display={display}>
+        <HelpTextContainer open={open ? '1' : '0'} background={background} display={display ? '1' : '-1'}>
             <HelpSpan>
                 {content}
             </HelpSpan>
@@ -40,7 +40,7 @@ const HelpSpan = styled.span`
 `
 
 const HelpTextContainer = styled.div`
-    opacity: ${props => props.open ? '1' : '0'};
+    opacity: ${props => props.open};
     background-color: ${props => props.background};
     transition: opacity 1s;
     width: 100%;
@@ -48,5 +48,5 @@ const HelpTextContainer = styled.div`
     text-align: center; 
     position: fixed; 
     top: 0; 
-    z-index: ${props =>  props.display ? '1' :  '-1' };
+    z-index: ${props =>  props.display};
 `
