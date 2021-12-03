@@ -1,30 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import submitCommentImage from '../../images/arrow-circle-right_pageArticle.svg';
 import styled from 'styled-components';
+import '../../styles/articles_details/articles_comments.css';
 
 
-const ArticlesComments = () => {
+const ArticlesComments = ({ data }) => {    
+
+    console.log(data.comments)
 
     return ( 
         <CommentWrapper className="CommentWrapper">
             <h3>Espace commentaires</h3>
 
-            <form method="POST" id="comment-form">
-                <label htmlFor="message">Ecrivez votre commentaire</label>
+            <form method="POST">
+                <label htmlFor="message"> Ecrivez votre commentaire </label>
                 <div className="form-sendbox">
                     <textarea name="message" rows="3" />
                     <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" />
                 </div>
-                <span className="help-text_comment" id="help-text_comment"></span>
+                <span className="help-text_comment"></span>
             </form>
-            <h4>Les derniers commentaires :</h4>
 
-            <span className="no-comment-text">Il n'y a pas de commentaire, soyez le premier à l'écrire !</span>
+            <h4>Les derniers commentaires :</h4>
+            
+            { data.comments.length === 0 ? <span className="no-comment-text">Il n'y a pas de commentaire, soyez le premier à l'écrire !</span> : null }
             
             <div className="user-comments_box">
-                    <span className="username"> John Doe</span>
-                    <span> comment content </span>
-                    <span className="createdAt"> 02/02/2021 </span>
+                <span className="username"> John Doe</span>
+                <span> comment content </span>
+                <span className="createdAt"> 02/02/2021 </span>
             </div>
         </CommentWrapper>
     )

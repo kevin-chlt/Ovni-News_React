@@ -82,16 +82,18 @@
     .entertainment_responsive, .entertainment:hover{
         background: #d6d1fd;
     }
+}
 
+@media screen and (max-width: 900px){
+    .small-category_icon{
+        height: 45px;
+    }
 
-    @media screen and (max-width: 900px){
-        .small-category_icon{
-            height: 45px;
-        }
+    .dropdown-text{
+        font-size: 0.9rem;
+    }
 
-        .dropdown-text{
-            font-size: 1.1rem;
-        }
-
+    .responsive-dropdown_open{
+        height: 380px;
     }
 }

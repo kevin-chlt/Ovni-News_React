@@ -67,7 +67,7 @@ const Main = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 70vh;
+    min-height: 72vh;
 `
 
 const FiltersWrapper = styled.aside`

@@ -35,7 +35,6 @@ const Authors = () => {
         }
     }
 
-    
     return (
         <>
         <Main>

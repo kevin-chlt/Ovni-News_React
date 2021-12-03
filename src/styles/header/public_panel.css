@@ -94,16 +94,14 @@
         height: 60px;
     }
 
-    .user-connexion_form input{
-        width: 98%;
+    .user-connexion_form{
+        width: 90%;
     }
 
-    .user-connexion_form{
-        width: 60%;
-    }
+
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 600px) {
     .small-category_icon, .small-connexion_icon{
         width: 50px;
         height: 45px;
@@ -111,11 +109,6 @@
 
     .user-connexion_form input{
         height: 15px;
-        width: 80%;
-    }
-
-    .user-connexion_form {
-        width: 90%;
     }
 
     .user-subscribe_link{

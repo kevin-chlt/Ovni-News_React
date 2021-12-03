@@ -42,5 +42,6 @@ const FormLoginWrapper = styled.div`
     }
     @media (max-width: 900px) {
         display: ${props => props.switchState ? 'none' : 'flex'};
+        padding-right: 0; 
     }
 `
