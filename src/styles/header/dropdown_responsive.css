@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Otomanopee One";
+    src: url("../fonts/OtomanopeeOne-Regular.ttf")
+}
+
 .responsive-dropdown_close, .responsive-dropdown_open, .small-category_icon {
     display: none;
 }
@@ -20,7 +25,7 @@
     }
 
     .responsive-dropdown_open{
-        height: 400px;   
+        height: 420px;   
         z-index: 1; 
         opacity: 1;
     }
@@ -39,10 +44,11 @@
     }
 
     .dropdown-text{
+        font-family: Otomanopee One, sans-serif;
         color: #2a2929;
         font-weight: bold;
         font-style: italic;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         padding: 15px 0;
         width: 100%;
         text-align: center;

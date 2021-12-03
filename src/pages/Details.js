@@ -5,22 +5,22 @@ import '../styles/articles_details/showArticle.css';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ArticlesComments from '../components/Articles_details/ArticlesComments';
 
-
-const Details = ({ articleId }) => {
+const Details = () => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
+    let  params = useParams(); 
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/details/${articleId}`)
+        axios.get(`https://127.0.0.1:8000/articles/details/${params.articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
         })
         return () => setMounted(false)
-    }, [articleId])
+    }, [params.articleId])
 
     
     return (
@@ -44,10 +44,10 @@ const Details = ({ articleId }) => {
                 <Link to={`/articles/${data.category[0].slug}`}>
                     Retour
                 </Link>
-                <Link to={`/articles/${data.category[0].slug}/${data.id -1}`} >
+                <Link to={`/articles/details/${data.id -1}`} >
                     Precedent
                 </Link>
-                <Link to={`/articles/${data.category[0].slug}/${data.id +1}`} >
+                <Link to={`/articles/details/${data.id +1}`} >
                     Suivant
                 </Link>
                 <a href={data.externalLink} target="_blank" rel="noreferrer noopener">

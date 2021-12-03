@@ -7,15 +7,19 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import FiltersByAuthors from '../components/Articles_list/FiltersByAuthors';
 import Loading from '../components/Loading';
+import { useParams } from 'react-router';
+import ItemsPerPage from '../components/Articles_list/ItemsPerPage';
 
 
-const Articles = ({ categoryId }) => {
+
+const Articles = () => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(20); 
+    let  params = useParams(); 
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/${categoryId}`)
+        axios.get(`https://127.0.0.1:8000/articles/${params.categoryId}`)
         .then(res => {
             setData(res.data);
             setMounted(true);
@@ -23,7 +27,7 @@ const Articles = ({ categoryId }) => {
         return () => {
             setMounted(false) 
         }
-    }, [categoryId])
+    }, [params.categoryId])
 
 
     const handleItemPerPage = (value) => {
@@ -39,20 +43,10 @@ const Articles = ({ categoryId }) => {
     <Main>
         <FiltersWrapper>
             <div className="container-filter_nbrPerPage">
-                <select value={itemsPerPage} onChange={(e) => handleItemPerPage(e.target.value)}>
-                    <option value="0">Nombre d'articles</option>
-                    <option value="5"> 5 </option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                </select>
+                <ItemsPerPage handleItemPerPage={handleItemPerPage} itemsPerPage={itemsPerPage}/>
             </div>
            <div>
-               <select className="authors_selector">
-                    <FiltersByAuthors />
-               </select>
+                <FiltersByAuthors />
            </div>
         </FiltersWrapper>
         

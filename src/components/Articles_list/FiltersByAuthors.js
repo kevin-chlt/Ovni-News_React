@@ -25,10 +25,10 @@ const FiltersByAuthors = () => {
     })
 
     return (
-        <>
-        <option value="0" onClick={() => navigation('/articles/general')} >Choissisez une source</option>
+        <select className="authors_selector">
+            <option value="0" onClick={() => navigation('/articles/general')} >Choissisez une source</option>
             {displayAuthorsList}
-        </>
+        </select>    
     )
 }
 

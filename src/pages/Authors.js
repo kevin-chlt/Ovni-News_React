@@ -5,16 +5,19 @@ import Loading from '../components/Loading';
 import styled from 'styled-components'; 
 import FiltersByAuthors from '../components/Articles_list/FiltersByAuthors';
 import Footer from '../components/Footer';
+import { useParams } from 'react-router';
+import ItemsPerPage from '../components/Articles_list/ItemsPerPage';
 
 
-const Authors = ({ authorId }) => {
+const Authors = () => {
     const [data,setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(20);
+    let  params = useParams(); 
 
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/authors/${authorId}`)
+        axios.get(`https://127.0.0.1:8000/authors/${params.authorId}`)
         .then(res => {
             setData(res.data); 
             setMounted(true); 
@@ -22,7 +25,7 @@ const Authors = ({ authorId }) => {
         return () => {
             setMounted(false); 
         }
-    }, [authorId])
+    }, [params.authorId])
 
     const handleItemPerPage = (value) => {
         setItemsPerPage(value)
@@ -38,20 +41,10 @@ const Authors = ({ authorId }) => {
         <Main>
             <FiltersWrapper>
                 <div className="container-filter_nbrPerPage">
-                    <select value={itemsPerPage} onChange={(e => handleItemPerPage(e.target.value))}>
-                        <option value="0">Nombre d'articles</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
-                    </select>
+                    <ItemsPerPage handleItemPerPage={handleItemPerPage} itemsPerPage={itemsPerPage}/>
                 </div>
                 <div>
-                    <select>
-                        <FiltersByAuthors />
-                    </select>
+                    <FiltersByAuthors />
                 </div>
             </FiltersWrapper>
 

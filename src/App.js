@@ -1,4 +1,4 @@
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useCallback, useState } from "react";
 import Header from './components/Header/Header'
 import Accueil from './pages/Accueil';
@@ -30,37 +30,12 @@ export default function App() {
     <Header handleRequestState={handleRequestState}/>
       
     <Routes>
-        <Route path="authors/:authorId" element={<Child />} />
+        <Route path="authors/:authorId" element={<Authors />} />
         <Route path="registration" element={<Registration handleRequestState={handleRequestState}/>} />
-        <Route path="articles/details/:articleId" element={<ChildTwo />} />
-        <Route path="articles/:categoryId" element={<Child />} />
+        <Route path="articles/details/:articleId" element={<Details />} />
+        <Route path="articles/:categoryId" element={<Articles />} />
         <Route path="*" element={<Accueil />} />
     </Routes>
   </>
       )
-}
-
-
-function Child() {
-  let  params = useParams(); 
-
-  if(params.categoryId){
-      return (
-      <Articles categoryId={params.categoryId} />
-    )
-  }
-
-  if(params.authorId) {
-    return (
-      <Authors authorId={params.authorId} />
-    )
-  }
-}
-
-
-function ChildTwo () {
-  let params = useParams(); 
-  return (
-    <Details category={params.categoryId} articleId={params.articleId} />
-  )
 }

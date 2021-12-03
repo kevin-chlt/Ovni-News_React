@@ -1,23 +1,26 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import loginBtn from '../../images/arrow-circle-right_pageArticle.svg';
+import { useNavigate } from 'react-router';
 
 
 const Login = ({ handleRequestState }) => {
     const [inputEmail, setInputEmail] = useState(''); 
     const [inputPassword, setInputPassword] = useState('');
+    let navigation = useNavigate(); 
 
     const getCredentials = () => {
         if(inputEmail.length <= 1 || inputPassword.length <= 1 ) {
             return handleRequestState('Veuillez remplir les 2 champs pour vous connecter', '#D83A56');
         }
 
-        axios.post('https://localhost:8000/api/login_check', {
+        axios.post('https://127.0.0.1:8000/api/login_check', {
             username: inputEmail,
             password: inputPassword
         }).then((res) => {
             localStorage.setItem('token', res.data.token);
-            handleRequestState('Bienvenue', 'darkgreen');
+            handleRequestState('Vous êtes bien connecté ! Bienvenue ! ', 'darkgreen');
+            navigation('/');
         }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
             handleRequestState(error, '#D83A56');
