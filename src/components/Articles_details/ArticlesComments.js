@@ -5,8 +5,17 @@ import '../../styles/articles_details/articles_comments.css';
 
 
 const ArticlesComments = ({ data }) => {    
+    
+    const commentsList = data.comments.map(comment => {
+        return (
+            <div key={comment.id} className="user-comments_box">
+                <span className="username"> { comment.users.lastname } { comment.users.firstname } </span>
+                <span> { comment.content } </span>
+                <span className="createdAt"> { new Date(comment.postedAt).toLocaleDateString('fr-FR') } </span>
+            </div>
+        )
 
-    console.log(data.comments)
+    })
 
     return ( 
         <CommentWrapper className="CommentWrapper">
@@ -23,13 +32,8 @@ const ArticlesComments = ({ data }) => {
 
             <h4>Les derniers commentaires :</h4>
             
-            { data.comments.length === 0 ? <span className="no-comment-text">Il n'y a pas de commentaire, soyez le premier à l'écrire !</span> : null }
+            { data.comments.length === 0 ? <span className="no-comment-text">Il n'y a pas de commentaire, soyez le premier à l'écrire !</span> : commentsList }
             
-            <div className="user-comments_box">
-                <span className="username"> John Doe</span>
-                <span> comment content </span>
-                <span className="createdAt"> 02/02/2021 </span>
-            </div>
         </CommentWrapper>
     )
 }

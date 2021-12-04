@@ -9,14 +9,11 @@ class Authentification {
 
     getUserDetails = () => {
         if(this.getCurrentUser) {
-            axios.post('https://127.0.0.1:8000/user')
-            .then(res => {
-                return res.data
-            })
-            .catch(() => false)
+           axios.get('https://127.0.0.1:8000/user')
+            .then(res => res.data)
+            .catch(() => null)
         }
     }
-
 }
 
 export default new Authentification(); 
