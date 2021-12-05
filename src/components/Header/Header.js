@@ -53,7 +53,7 @@ const Header = ({ handleRequestState }) => {
                 </div>
 
                 <div className="user-panel_container">
-                    <img className="user-picture_img" src={profilImageDefault} alt="" />
+                    <img className="user-picture_img" src={profilImageDefault} alt="photo_de_profil" />
                 </div>
             </>
             :

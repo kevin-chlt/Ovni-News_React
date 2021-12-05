@@ -5,16 +5,20 @@ import '../../styles/articles_details/articles_comments.css';
 
 
 const ArticlesComments = ({ data }) => {    
-    
-    const commentsList = data.comments.map(comment => {
+    const [commentInput, setCommentInput] = useState(''); 
+
+    const sentComment = () => {
+        console.log(commentInput)
+    }
+        
+    const commentsList = data.comments.map((comment, i) => {
         return (
-            <div key={comment.id} className="user-comments_box">
+            <div key={comment.id} className="user-comments_box" style={{alignSelf: i % 2 ? 'flex-end' : 'flex-start'}}>
                 <span className="username"> { comment.users.lastname } { comment.users.firstname } </span>
                 <span> { comment.content } </span>
-                <span className="createdAt"> { new Date(comment.postedAt).toLocaleDateString('fr-FR') } </span>
+                <span className="createdAt"> { new Date(comment.postedAt).toLocaleString('fr-FR', {day: '2-digit', month: '2-digit' , year:'numeric', hour:'numeric', minute: '2-digit'}) } </span>
             </div>
         )
-
     })
 
     return ( 
@@ -24,8 +28,8 @@ const ArticlesComments = ({ data }) => {
             <form method="POST">
                 <label htmlFor="message"> Ecrivez votre commentaire </label>
                 <div className="form-sendbox">
-                    <textarea name="message" rows="3" />
-                    <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" />
+                    <textarea name="message" rows="3" onChange={(e) => setCommentInput(e.target.value)} />
+                    <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" onClick={() => sentComment()} />
                 </div>
                 <span className="help-text_comment"></span>
             </form>
