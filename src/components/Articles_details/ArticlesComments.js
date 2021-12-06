@@ -10,7 +10,7 @@ const ArticlesComments = ({ data, handleRequestState }) => {
 
     const sentComment = () => {
         if(!commentInput.match(/^[.A-z0-9À-ÿ /'-?!&;:,()]+$/)){
-            handleRequestState('Format du commentaire non autorisé. Veuillez utilisé seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
+            handleRequestState('Format du commentaire non autorisé. Veuillez utiliser seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
         }
 
         axios.post('https://127.0.0.1:8000/api/comments', {
