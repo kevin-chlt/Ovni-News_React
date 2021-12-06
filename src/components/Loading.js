@@ -10,14 +10,14 @@ const Loading = () => {
     )
 }
 
-export default Loading
+export default Loading;
 
-const Load8 = keyframes`
-    0% {
+const load = keyframes`
+    from {
       transform: rotate(0deg);
-    }
-    100% {
+    } to {
       transform: rotate(360deg);
+    }
 `
 
 const LoadingIcon = styled.div`
@@ -27,10 +27,9 @@ const LoadingIcon = styled.div`
     width: 4em;
     height: 4em;
     border: 1.1em solid rgba(0, 0, 0, 0.2);
-    border-left: 1.1em solid #000000;
+    border-left: 1.1em solid #D83A56;
     border-radius: 50%;
-    animation: ${Load8} 1.1s infinite linear;
-    transition: opacity 0.3s;
+    animation: ${load} 1s linear infinite;
     @media (max-width: 800px) {
         width: 2em; 
         height: 2em; 

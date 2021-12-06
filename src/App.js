@@ -6,7 +6,7 @@ import Articles from "./pages/Articles";
 import Details from "./pages/Details";
 import Registration from "./pages/Registration";
 import Helptext from './components/Helptext'
-import './components/Auth/AxiosInterceptor';
+import './services/AxiosInterceptor';
 import Authors from "./pages/Authors";
 
 
@@ -22,7 +22,6 @@ export default function App() {
         background: background
       }); 
   }, [])
-
   
     return (
   <>
@@ -32,7 +31,7 @@ export default function App() {
     <Routes>
         <Route path="authors/:authorId" element={<Authors />} />
         <Route path="registration" element={<Registration handleRequestState={handleRequestState}/>} />
-        <Route path="articles/details/:articleId" element={<Details />} />
+        <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} />} />
         <Route path="articles/:categoryId" element={<Articles />} />
         <Route path="*" element={<Accueil />} />
     </Routes>

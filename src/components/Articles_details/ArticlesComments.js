@@ -2,15 +2,31 @@ import React, { useState } from 'react'
 import submitCommentImage from '../../images/arrow-circle-right_pageArticle.svg';
 import styled from 'styled-components';
 import '../../styles/articles_details/articles_comments.css';
+import axios from 'axios';
 
 
-const ArticlesComments = ({ data }) => {    
+const ArticlesComments = ({ data, handleRequestState }) => {    
     const [commentInput, setCommentInput] = useState(''); 
 
     const sentComment = () => {
-        console.log(commentInput)
+        if(!commentInput.match(/^[.A-z0-9À-ÿ /'-?!&;:,()]+$/)){
+            handleRequestState('Format du commentaire non autorisé. Veuillez utilisé seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
+        }
+
+        axios.post('https://127.0.0.1:8000/api/comments', {
+            content: commentInput, 
+            articles: `/api/articles/${data.id}`, 
+            users: `/api/users/${'2d4998d3-4f73-11ec-9d4e-309c23ed1c26'}`
+        }).then(res => res === 201 ? handleRequestState('ok', 'green') : handleRequestState(res.message , 'red') )
     }
         
+
+    const handleChangeComment = (e) => {
+        setCommentInput(e.target.value); 
+        handleRequestState('');
+    }
+
+
     const commentsList = data.comments.map((comment, i) => {
         return (
             <div key={comment.id} className="user-comments_box" style={{alignSelf: i % 2 ? 'flex-end' : 'flex-start'}}>
@@ -28,7 +44,7 @@ const ArticlesComments = ({ data }) => {
             <form method="POST">
                 <label htmlFor="message"> Ecrivez votre commentaire </label>
                 <div className="form-sendbox">
-                    <textarea name="message" rows="3" onChange={(e) => setCommentInput(e.target.value)} />
+                    <textarea name="message" rows="3" onChange={(e) => handleChangeComment(e)} />
                     <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" onClick={() => sentComment()} />
                 </div>
                 <span className="help-text_comment"></span>

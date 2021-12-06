@@ -34,7 +34,7 @@ export default PublicPanel;
 const FormLoginWrapper = styled.div`
     display: flex;
     padding-right: 10px;
-    align-item: center; 
+    align-items: center; 
     justify-content: center;
     @media (max-width: 1400px) {
         grid-column: 2;

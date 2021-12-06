@@ -6,8 +6,8 @@ import DropdownMenu from "./DropdownMenu";
 import '../../styles/header/header.css';
 import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
-import profilImageDefault from '../../images/male-default-profile-picture.jpg';
-import Authentification from '../Auth/Authentification';
+import Authentification from '../../services/Authentification';
+import UserPanel from "./UserPanel";
 
 
 const Header = ({ handleRequestState }) => {
@@ -46,26 +46,12 @@ const Header = ({ handleRequestState }) => {
                     { categories }
                 </nav>
            {Authentification.getCurrentUser() ? 
-            <>
-                 <div className="user-board_container">
-                    <span className="userName_text"> John Doe </span>
-                    <Link to="/my-profile" className="user-profil_link">Accédez à votre profil</Link>
-                </div>
-
-                <div className="user-panel_container">
-                    <img className="user-picture_img" src={profilImageDefault} alt="photo_de_profil" />
-                </div>
-            </>
+                <UserPanel />
             :
                 <PublicPanel handleRequestState={handleRequestState} />
            }
     
-                
-
-
-
-
-                
+    
                 <DropdownMenu 
                 categories={datas} 
                 open={dropdownOpen} 

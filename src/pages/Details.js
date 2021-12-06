@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import ArticlesComments from '../components/Articles_details/ArticlesComments';
 import ArticlesContent from '../components/Articles_details/ArticlesContent';
 
-const Details = () => {
+const Details = ({ handleRequestState }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     let  params = useParams(); 
@@ -28,7 +28,7 @@ const Details = () => {
     <Main>
         <ArticlesContent data={data} />
         
-        <ArticlesComments data={data} />
+        <ArticlesComments data={data} handleRequestState={handleRequestState} />
     </Main>
 
     <Footer />
