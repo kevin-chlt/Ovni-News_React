@@ -7,10 +7,15 @@ import { useParams } from 'react-router-dom';
 import ArticlesComments from '../components/Articles_details/ArticlesComments';
 import ArticlesContent from '../components/Articles_details/ArticlesContent';
 
-const Details = ({ handleRequestState }) => {
+const Details = ({ handleRequestState, user }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     let  params = useParams(); 
+
+    const handleComment = (comment) => {
+        console.log(comment);
+        //setData(...data, comment)
+    }
 
     useEffect(() => {
         axios.get(`https://127.0.0.1:8000/articles/details/${params.articleId}`)
@@ -28,7 +33,7 @@ const Details = ({ handleRequestState }) => {
     <Main>
         <ArticlesContent data={data} />
         
-        <ArticlesComments data={data} handleRequestState={handleRequestState} />
+        <ArticlesComments data={data} handleRequestState={handleRequestState} user={user} handleComment={handleComment} />
     </Main>
 
     <Footer />

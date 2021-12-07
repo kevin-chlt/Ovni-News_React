@@ -5,24 +5,38 @@ import '../../styles/articles_details/articles_comments.css';
 import axios from 'axios';
 
 
-const ArticlesComments = ({ data, handleRequestState }) => {    
-    const [commentInput, setCommentInput] = useState(''); 
+const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => {    
+    const [newComment, setNewComment] = useState({
+        content: '',
+    })
 
     const sentComment = () => {
-        if(!commentInput.match(/^[.A-z0-9À-ÿ /'-?!&;:,()]+$/)){
-            handleRequestState('Format du commentaire non autorisé. Veuillez utiliser seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
+        if(!newComment.content.match(/^[.A-z0-9À-ÿ /'-?!&;:,()]+$/) || newComment.content.length < 1 ){
+           return handleRequestState('Format du commentaire non autorisé. Veuillez utiliser seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
+        }
+        if(!user) {
+          return  handleRequestState('Veuillez vous connecter pour écrire un message', '#D83A56')
         }
 
-        axios.post('https://127.0.0.1:8000/api/comments', {
-            content: commentInput, 
-            articles: `/api/articles/${data.id}`, 
-            users: `/api/users/${'2d4998d3-4f73-11ec-9d4e-309c23ed1c26'}`
-        }).then(res => res === 201 ? handleRequestState('ok', 'green') : handleRequestState(res.message , 'red') )
+        axios.post('https://127.0.0.1:8000/api/comments', {...newComment})
+        .then(res => {
+           if (res.status >= 200 && res.status < 300 ) {
+               handleRequestState('Message envoyé avec succès', 'darkgreen');
+               handleComment(newComment); 
+           }
+        })
+        .catch(() => {
+            handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56')
+        })
     }
         
-
     const handleChangeComment = (e) => {
-        setCommentInput(e.target.value); 
+        setNewComment({
+            ...newComment,
+             content: e.target.value,
+             users: `/api/users/${user.id}`,
+             articles: `/api/articles/${data.id}`,
+        })
         handleRequestState('');
     }
 
@@ -32,7 +46,9 @@ const ArticlesComments = ({ data, handleRequestState }) => {
             <div key={comment.id} className="user-comments_box" style={{alignSelf: i % 2 ? 'flex-end' : 'flex-start'}}>
                 <span className="username"> { comment.users.lastname } { comment.users.firstname } </span>
                 <span> { comment.content } </span>
-                <span className="createdAt"> { new Date(comment.postedAt).toLocaleString('fr-FR', {day: '2-digit', month: '2-digit' , year:'numeric', hour:'numeric', minute: '2-digit'}) } </span>
+                <span className="createdAt">
+                     { new Date(comment.postedAt).toLocaleString('fr-FR', {day: '2-digit', month: '2-digit' , year:'numeric', hour:'numeric', minute: '2-digit'}) }
+                 </span>
             </div>
         )
     })
@@ -47,7 +63,6 @@ const ArticlesComments = ({ data, handleRequestState }) => {
                     <textarea name="message" rows="3" onChange={(e) => handleChangeComment(e)} />
                     <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" onClick={() => sentComment()} />
                 </div>
-                <span className="help-text_comment"></span>
             </form>
 
             <h4>Les derniers commentaires :</h4>

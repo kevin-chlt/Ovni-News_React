@@ -9,12 +9,12 @@ const Login = ({ handleRequestState }) => {
     const [inputPassword, setInputPassword] = useState('');
     let navigation = useNavigate(); 
 
-    const getCredentials = () => {
+    const getCredentials = async () => {
         if(inputEmail.length <= 1 || inputPassword.length <= 1 ) {
             return handleRequestState('Veuillez remplir les 2 champs pour vous connecter', '#D83A56');
         }
 
-        axios.post('https://127.0.0.1:8000/api/login_check', {
+        await axios.post('https://127.0.0.1:8000/api/login_check', {
             username: inputEmail,
             password: inputPassword
         }).then((res) => {

@@ -87,18 +87,6 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.help-text_comment {
-    font-size: 0.8rem;
-    color: #ffffff;
-    margin: 5px 0;
-    padding: 10px 7px;
-    font-weight: bold;
-    text-align: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset;
-    border-radius: 5px;
-    font-family: Open-Sans, serif;
-}
-
 .no-comment-text{
     color: #ffffff;
     font-size: 1rem;

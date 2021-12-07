@@ -1,30 +1,33 @@
 import axios from 'axios';
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import profilImageDefault from '../../images/male-default-profile-picture.jpg';
 import '../../styles/header/user_panel.css'; 
 
-
-const UserPanel = () => {
-    const [user, setUser] = useState([]);
-    const [userId, setUserId] = useState('') 
+const UserPanel = ({ handleUser, user, handleRequestState }) => {
 
     const userFetch = useCallback( async () => {
+        let userId = '';
         await axios.get('https://127.0.0.1:8000/user')
-        .then(res => setUserId(res.data.id)) 
-        .catch(error => console.log(error))
-
+        .then(res => userId = res.data.id) 
+        .catch(error => {
+            if(error) {
+                handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')
+                localStorage.clear()
+            }
+        }) 
+        
         await axios.get(`https://127.0.0.1:8000/api/users/${userId}`)
-        .then(res => setUser(res.data))
-        .catch(error => console.log(error)) 
-    },[userId])
+        .then(res => handleUser(res.data))
+        .catch(() => handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')) 
+    },[handleUser, handleRequestState])
 
     useEffect(() => {
-        userFetch()
+       userFetch()
     }, [userFetch])
 
     const handleDeconnexion = () => {
         localStorage.clear(); 
-        window.location.reload();
+        window.location.reload(); 
     }
     
     return (

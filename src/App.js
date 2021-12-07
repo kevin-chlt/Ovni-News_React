@@ -15,6 +15,7 @@ export default function App() {
     content: '',
     background:'transparent'
   });
+  const [user, setUser] = useState('');
 
   const handleRequestState = useCallback ((content, background) => {
     setRequestState({ 
@@ -22,16 +23,20 @@ export default function App() {
         background: background
       }); 
   }, [])
+
+  const handleUser = useCallback( user => {
+    setUser(user);
+  }, [])
   
     return (
   <>
     <Helptext {...requestState} />
-    <Header handleRequestState={handleRequestState}/>
+    <Header handleRequestState={handleRequestState} handleUser={handleUser} user={user} />
       
     <Routes>
         <Route path="authors/:authorId" element={<Authors />} />
         <Route path="registration" element={<Registration handleRequestState={handleRequestState}/>} />
-        <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} />} />
+        <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} user={user} />} />
         <Route path="articles/:categoryId" element={<Articles />} />
         <Route path="*" element={<Accueil />} />
     </Routes>

@@ -6,18 +6,18 @@ import DropdownMenu from "./DropdownMenu";
 import '../../styles/header/header.css';
 import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
-import { getCurrentUser, getUserDetails } from '../../services/TokenManager';
+import { getCurrentUser } from '../../services/TokenManager';
 import UserPanel from "./UserPanel";
 
 
-const Header = ({ handleRequestState }) => {
+const Header = ({ handleRequestState, handleUser, user }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
-        .catch(errors => handleRequestState(errors.message))
+        .catch(() => handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56'))
     }, [handleRequestState])
 
        const handleDropdownClassname = () => {
@@ -46,8 +46,8 @@ const Header = ({ handleRequestState }) => {
                     { categories }
                 </nav>
                 
-           { getCurrentUser() && getUserDetails() ? 
-                <UserPanel />
+           { getCurrentUser() ? 
+                <UserPanel user={user} handleUser={handleUser} handleRequestState={handleRequestState} />
             :
                 <PublicPanel handleRequestState={handleRequestState} />
            }
