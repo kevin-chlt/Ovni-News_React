@@ -18,7 +18,6 @@ const Header = ({ handleRequestState }) => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
         .catch(errors => handleRequestState(errors.message))
-        console.log(getUserDetails())
     }, [handleRequestState])
 
        const handleDropdownClassname = () => {

@@ -1,0 +1,62 @@
+/* PARTIE UTILISATEUR */
+.user-board_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.userName_text{
+    font-weight: bold;
+    font-size: 18px;
+    color: #D83A56;
+    margin-bottom: 3px;
+}
+
+.deconnect-btn{
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #D83A56;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.deconnect-btn:hover{
+    padding: 8px 15px;
+}
+
+.user-panel_container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-picture_img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: #000000 1px solid;
+}
+
+@media screen and (max-width: 900px){
+    .user-board_container{
+        grid-column: 2;
+    }
+
+    .user-picture_img{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .deconnect-btn, .userName_text  {
+        font-size: 0.9rem;
+    }
+}

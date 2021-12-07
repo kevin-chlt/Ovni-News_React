@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react'
 import profilImageDefault from '../../images/male-default-profile-picture.jpg';
+import '../../styles/header/user_panel.css'; 
 
 
 const UserPanel = () => {
@@ -23,13 +24,14 @@ const UserPanel = () => {
 
     const handleDeconnexion = () => {
         localStorage.clear(); 
+        window.location.reload();
     }
     
     return (
     <>
         <div className="user-board_container">
            <span className="userName_text"> {user.lastname} {user.firstname} </span>
-           <span className="user-profil_link" onClick={() => handleDeconnexion()}> Déconnexion </span>
+           <button className="deconnect-btn" onClick={() => handleDeconnexion()}> Déconnexion </button>
        </div>
 
        <div className="user-panel_container">
