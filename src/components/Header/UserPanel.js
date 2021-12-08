@@ -9,12 +9,7 @@ const UserPanel = ({ handleUser, user, handleRequestState }) => {
         let userId = '';
         await axios.get('https://127.0.0.1:8000/user')
         .then(res => userId = res.data.id) 
-        .catch(error => {
-            if(error) {
-                handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')
-                localStorage.clear()
-            }
-        }) 
+        .catch(() => handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')) 
         
         await axios.get(`https://127.0.0.1:8000/api/users/${userId}`)
         .then(res => handleUser(res.data))

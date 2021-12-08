@@ -17,7 +17,10 @@ const Header = ({ handleRequestState, handleUser, user }) => {
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/categories/')
         .then(res => setDatas(res.data))
-        .catch(() => handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56'))
+        .catch(() => {
+            localStorage.clear();
+            handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56')
+        }) 
     }, [handleRequestState])
 
        const handleDropdownClassname = () => {

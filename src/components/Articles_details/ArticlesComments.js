@@ -25,10 +25,7 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
                handleComment(newComment); 
            }
         })
-        .catch((error) => {
-            console.log(error)
-            handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56')
-        })
+        .catch(() => handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56'))
     }
         
     const handleChangeComment = (e) => {
@@ -61,7 +58,7 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
         <CommentWrapper className="CommentWrapper">
             <h3>Espace commentaires</h3>
 
-            <form method="POST">
+            <form>
                 <label htmlFor="message"> Ecrivez votre commentaire </label>
                 <div className="form-sendbox">
                     <textarea name="message" rows="3" onChange={(e) => handleChangeComment(e)} />

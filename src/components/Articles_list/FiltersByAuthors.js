@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
 
-const FiltersByAuthors = () => {
+const FiltersByAuthors = ({ handleRequestState }) => {
     const [authorsList, setAuthorsList] = useState([]); 
     let navigation = useNavigate();
 
@@ -11,8 +11,8 @@ const FiltersByAuthors = () => {
         axios.get(`https://127.0.0.1:8000/authors/`)
         .then((res) => {
             setAuthorsList(res.data);
-        })
-    }, [])
+        }).catch(() => handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56'))
+    }, [handleRequestState])
     
     const handleClickAuthor = (key) => {
         return navigation(`../authors/${key}`)

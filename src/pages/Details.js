@@ -23,8 +23,8 @@ const Details = ({ handleRequestState, user }) => {
             setData(res.data); 
             setMounted(true); 
         })
-        .catch(error => console.log(error))
-   }, [params.articleId])
+        .catch(() => handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56'))
+   }, [params.articleId, handleRequestState])
 
     useEffect(() => {
         getArticle()

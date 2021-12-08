@@ -9,7 +9,7 @@ import { useParams } from 'react-router';
 import ItemsPerPage from '../components/Articles_list/ItemsPerPage';
 
 
-const Authors = () => {
+const Authors = ({ handleRequestState }) => {
     const [data,setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(20);
@@ -22,10 +22,10 @@ const Authors = () => {
             setData(res.data); 
             setMounted(true); 
         })
-        return () => {
-            setMounted(false); 
-        }
-    }, [params.authorId])
+        .catch(() => handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56'))
+        return () => setMounted(false); 
+        
+    }, [params.authorId, handleRequestState])
 
     const handleItemPerPage = (value) => {
         setItemsPerPage(value)

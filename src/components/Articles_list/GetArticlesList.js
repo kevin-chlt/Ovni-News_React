@@ -18,7 +18,7 @@ const GetArticlesList = ({ data, itemsPerPage }) => {
 
     return (
         <>
-            {articlesList}
+            {articlesList.length === 0 ? 'Aucun article à affiché.' : articlesList}
             
             <Pagination getCurrentItems={getCurrentItems} itemsPerPage={itemsPerPage} data={data} /> 
             

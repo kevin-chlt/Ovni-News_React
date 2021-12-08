@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import loginBtn from '../../images/arrow-circle-right_pageArticle.svg';
-import { useNavigate } from 'react-router';
 
 
 const Login = ({ handleRequestState }) => {
     const [inputEmail, setInputEmail] = useState(''); 
     const [inputPassword, setInputPassword] = useState('');
-    let navigation = useNavigate(); 
 
     const getCredentials = async () => {
         if(inputEmail.length <= 1 || inputPassword.length <= 1 ) {
@@ -17,10 +15,9 @@ const Login = ({ handleRequestState }) => {
         await axios.post('https://127.0.0.1:8000/api/login_check', {
             username: inputEmail,
             password: inputPassword
-        }).then((res) => {
+        }).then(res => {
             localStorage.setItem('token', res.data.token);
             handleRequestState('Vous êtes bien connecté ! Bienvenue ! ', 'darkgreen');
-            navigation('/');
         }).catch(errors => {
             let error = errors.response.status === 401 ? 'Mauvais identifiants...' : 'Une erreur est apparue lors de la connexion au serveur, veuillez réessayer plus tard ...';
             handleRequestState(error, '#D83A56');
