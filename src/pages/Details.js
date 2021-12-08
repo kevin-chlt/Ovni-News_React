@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import axios from "axios";
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -12,19 +12,24 @@ const Details = ({ handleRequestState, user }) => {
     const [mounted, setMounted] = useState(false);
     let  params = useParams(); 
 
-    const handleComment = (comment) => {
-        console.log(comment);
-        //setData(...data, comment)
-    }
+   const handleComment = comment => {
+       Object.assign(...data.comments, comment)
+       getArticle();
+   }
 
-    useEffect(() => {
+   const getArticle = useCallback(() => {
         axios.get(`https://127.0.0.1:8000/articles/details/${params.articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
         })
+        .catch(error => console.log(error))
+   }, [params.articleId])
+
+    useEffect(() => {
+        getArticle()
         return () => setMounted(false)
-    }, [params.articleId])
+    }, [getArticle])
 
     
     return (

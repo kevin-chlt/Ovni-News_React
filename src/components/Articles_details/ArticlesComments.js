@@ -25,7 +25,8 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
                handleComment(newComment); 
            }
         })
-        .catch(() => {
+        .catch((error) => {
+            console.log(error)
             handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56')
         })
     }
@@ -40,8 +41,11 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
         handleRequestState('');
     }
 
+    const commentListSorted = data.comments.sort((a, b) => {
+        return a.postedAt < b.postedAt; 
+    }) 
 
-    const commentsList = data.comments.map((comment, i) => {
+    const commentsList = commentListSorted.map((comment, i) => {
         return (
             <div key={comment.id} className="user-comments_box" style={{alignSelf: i % 2 ? 'flex-end' : 'flex-start'}}>
                 <span className="username"> { comment.users.lastname } { comment.users.firstname } </span>
