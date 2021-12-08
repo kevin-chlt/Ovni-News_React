@@ -29,17 +29,17 @@ export default function App() {
   }, [])
   
     return (
-  <>
-    <Helptext {...requestState} />
-    <Header handleRequestState={handleRequestState} handleUser={handleUser} user={user} />
-      
-    <Routes>
-        <Route path="authors/:authorId" element={<Authors handleRequestState={handleRequestState} />} />
-        <Route path="registration" element={<Registration handleRequestState={handleRequestState} />} />
-        <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} user={user} />} />
-        <Route path="articles/:categoryId" element={<Articles handleRequestState={handleRequestState} />} />
-        <Route path="*" element={<Accueil />} />
-    </Routes>
-  </>
+        <>
+          <Helptext {...requestState} />
+          <Header handleRequestState={handleRequestState} handleUser={handleUser} user={user} />
+            
+          <Routes>
+              <Route path="authors/:authorId" element={<Authors handleRequestState={handleRequestState} />} />
+              <Route path="registration" element={<Registration handleRequestState={handleRequestState} />} />
+              <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} user={user} />} />
+              <Route path="articles/:categoryId" element={<Articles handleRequestState={handleRequestState} />} />
+              <Route path="*" element={<Accueil />} />
+          </Routes>
+        </>
       )
 }

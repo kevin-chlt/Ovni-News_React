@@ -15,7 +15,7 @@ const Articles = ({ handleRequestState }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(20); 
-    let  params = useParams(); 
+    let params = useParams(); 
 
     useEffect(() => {
         axios.get(`https://127.0.0.1:8000/articles/${params.categoryId}`)
