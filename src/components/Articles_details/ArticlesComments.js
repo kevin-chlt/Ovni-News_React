@@ -12,17 +12,18 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
 
     const sentComment = () => {
         if(!newComment.content.match(/^[.A-z0-9À-ÿ /'-?!&;:,()]+$/) || newComment.content.length < 1 ){
-           return handleRequestState('Format du commentaire non autorisé. Veuillez utiliser seulement des lettres et éviter les caractères spéciaux.', '#D83A56')
+           return handleRequestState('Format du commentaire non autorisé.', '#D83A56')
         }
         if(!user) {
-          return  handleRequestState('Veuillez vous connecter pour écrire un message', '#D83A56')
+          return handleRequestState('Veuillez vous connecter pour écrire un message', '#D83A56')
         }
 
         axios.post('https://127.0.0.1:8000/api/comments', {...newComment})
         .then(res => {
            if (res.status >= 200 && res.status < 300 ) {
-               handleRequestState('Message envoyé avec succès', 'darkgreen');
-               handleComment(newComment); 
+                handleRequestState('Message envoyé avec succès', 'darkgreen');
+                handleComment(newComment); 
+                setNewComment({content: ''})
            }
         })
         .catch(() => handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56'))
@@ -31,7 +32,7 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
     const handleChangeComment = (e) => {
         setNewComment({
             ...newComment,
-             content: e.target.value,
+             content: e.target.value, 
              users: `/api/users/${user.id}`,
              articles: `/api/articles/${data.id}`,
         })
@@ -61,7 +62,7 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
             <form>
                 <label htmlFor="message"> Ecrivez votre commentaire </label>
                 <div className="form-sendbox">
-                    <textarea name="message" rows="3" onChange={(e) => handleChangeComment(e)} />
+                    <textarea name="message" rows="3" value={newComment.content} onChange={(e) => handleChangeComment(e)} />
                     <img role="button" src={submitCommentImage} alt="bouton_envoi_commentaire" onClick={() => sentComment()} />
                 </div>
             </form>
