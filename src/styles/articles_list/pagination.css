@@ -22,7 +22,7 @@
     display: none;
 }
 
-.active{
+.active-pagination{
     font-size: 2rem;
     text-decoration: underline;
 }

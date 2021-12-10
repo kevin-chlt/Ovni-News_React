@@ -30,7 +30,7 @@ const Pagination = ({ itemsPerPage, data, getCurrentItems }) => {
           previousLabel="<"
           disabledClassName="hide-pagination"
           renderOnZeroPageCount={null}
-          activeLinkClassName="active"
+          activeLinkClassName="active-pagination"
         />
     );
   }

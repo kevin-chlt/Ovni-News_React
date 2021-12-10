@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 import PublicPanel from "./PublicPanel";
 import DropdownMenu from "./DropdownMenu";
@@ -8,11 +8,11 @@ import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
 import { getCurrentUser } from '../../services/TokenManager';
 import UserPanel from "./UserPanel";
+import styled, { css } from "styled-components";
 
 
 const Header = ({ handleRequestState, handleUser, user }) => {
     const [datas, setDatas] = useState([]);
-    const [activeCategory, setActiveCategory] = useState(null); 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const backgroundCategoryBtn = {
         health: '#185ADB',
@@ -38,21 +38,22 @@ const Header = ({ handleRequestState, handleUser, user }) => {
         setDropdownOpen(!dropdownOpen);
     }
 
-    const setBgBtn = (slug, e) => {
-        setActiveCategory(slug);
-    }
-
+    const active = css`
+        font-size: 2rem;
+    `
+   
     const categories = datas.map(category => {
         return (
-            <Link 
+            <BtnCategoryLink 
                 key={category.id} 
-                className={`header-nav_link ${category.slug}`} 
+                className={` ${category.slug} 
+                ${ ({ isActive }) => isActive ? 'active' : '' }
+                `} 
+                
                 to={`/articles/${category.slug}`} 
-                onClick={(e) => setBgBtn(category.slug, e)}  
-                style={{backgroundColor: backgroundCategoryBtn[activeCategory]}}
                 >
                     {category.name}
-            </Link>
+            </BtnCategoryLink>
         );
     })
 
@@ -92,3 +93,17 @@ const Header = ({ handleRequestState, handleUser, user }) => {
 
 export default Header;
 
+const BtnCategoryLink = styled(NavLink)` 
+    transition: 0.3s;
+    width: 100%;
+    font-family: Otomanopee One, sans-serif;
+    text-align: center;
+    padding: 15px 5px;
+    color: #D83A56;
+    font-size: 1.1rem;
+    text-decoration: none;
+    &:hover{
+        color: #ffffff;
+    }
+    background-color: ${props => props.active ? 'blue' : ''};
+`
