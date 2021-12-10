@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 
-const Loading = () => {//animation: ${load} 1s linear infinite;
+const Loading = () => {//
     return (
         <>
             <LoadingIcon />
@@ -29,7 +29,7 @@ const LoadingIcon = styled.div`
     border: 1.1em solid rgba(0, 0, 0, 0.2);
     border-left: 1.1em solid #D83A56;
     border-radius: 50%;
-    
+    animation: 1s ${load} linear infinite;
     @media (max-width: 800px) {
         width: 2em; 
         height: 2em; 

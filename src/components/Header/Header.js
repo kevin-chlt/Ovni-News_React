@@ -8,12 +8,12 @@ import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
 import { getCurrentUser } from '../../services/TokenManager';
 import UserPanel from "./UserPanel";
-import { css } from "styled-components";
 
 
 const Header = ({ handleRequestState, handleUser, user }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(''); 
     const backgroundCategoryBtn = {
         health: '#185ADB',
         entertainment: '#B4AEE8',
@@ -33,30 +33,28 @@ const Header = ({ handleRequestState, handleUser, user }) => {
         }) 
     }, [handleRequestState])
 
-
     const handleDropdownClassname = () => {
         setDropdownOpen(!dropdownOpen);
     }
 
-    const active = css`
-        font-size: 2rem;
-    `
-   
     const categories = datas.map(category => {
         return (
             <NavLink
                 key={category.id} 
-                className={` ${category.slug} header-nav_link
-                ${ ({ isActive }) => isActive ? 'active' : '' }
-                `} 
-                
+                className={` ${category.slug} header-nav_link`}
+                onClick={() => setActiveCategory(category.slug)}
+                style={({ isActive }) => {
+                    return {
+                        color: isActive ? '#fff' : '', 
+                        backgroundColor: isActive ? backgroundCategoryBtn[activeCategory] : ''
+                    }
+                }}
                 to={`/articles/${category.slug}`} 
                 >
                     {category.name}
             </NavLink>
         );
     })
-
 
     return (
         <header>
