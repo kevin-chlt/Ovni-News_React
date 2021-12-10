@@ -33,6 +33,21 @@ header .link-logo{
     align-items: center;
 }
 
+.header-nav_link{
+    transition: 0.3s;
+    width: 100%;
+    font-family: Otomanopee One, sans-serif;
+    text-align: center;
+    padding: 15px 5px;
+    color: #D83A56;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.header-nav_link:hover{
+    color: #ffffff;
+}
+
 
 /* BORDURE BOUTON & ANIMATION COULEUR CATEGORIE */
 .entertainment {

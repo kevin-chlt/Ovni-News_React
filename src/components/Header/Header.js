@@ -8,7 +8,7 @@ import dropdownBurger from '../../images/align-justify.svg';
 import logo from '../../images/logo.svg';
 import { getCurrentUser } from '../../services/TokenManager';
 import UserPanel from "./UserPanel";
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 
 const Header = ({ handleRequestState, handleUser, user }) => {
@@ -44,16 +44,16 @@ const Header = ({ handleRequestState, handleUser, user }) => {
    
     const categories = datas.map(category => {
         return (
-            <BtnCategoryLink 
+            <NavLink
                 key={category.id} 
-                className={` ${category.slug} 
+                className={` ${category.slug} header-nav_link
                 ${ ({ isActive }) => isActive ? 'active' : '' }
                 `} 
                 
                 to={`/articles/${category.slug}`} 
                 >
                     {category.name}
-            </BtnCategoryLink>
+            </NavLink>
         );
     })
 
@@ -92,18 +92,3 @@ const Header = ({ handleRequestState, handleUser, user }) => {
 }
 
 export default Header;
-
-const BtnCategoryLink = styled(NavLink)` 
-    transition: 0.3s;
-    width: 100%;
-    font-family: Otomanopee One, sans-serif;
-    text-align: center;
-    padding: 15px 5px;
-    color: #D83A56;
-    font-size: 1.1rem;
-    text-decoration: none;
-    &:hover{
-        color: #ffffff;
-    }
-    background-color: ${props => props.active ? 'blue' : ''};
-`
