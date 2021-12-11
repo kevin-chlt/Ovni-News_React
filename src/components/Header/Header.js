@@ -25,7 +25,7 @@ const Header = ({ handleRequestState, handleUser, user }) => {
     }
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/categories/')
+        axios.get('https://127.0.0.1:8000/api/categories/')
         .then(res => setDatas(res.data))
         .catch(() => {
             localStorage.clear();

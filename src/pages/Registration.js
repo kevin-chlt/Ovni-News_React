@@ -143,10 +143,9 @@ const Registration = ({ handleRequestState }) => {
 export default Registration;
 
 const Main = styled.main`
-    height: 100vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: rgba(216, 58, 86, 0.7);
 `

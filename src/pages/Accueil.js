@@ -29,7 +29,7 @@ const Accueil = () => {
 
         <div className="category-list_container">
             <Link to="/articles/general" >
-                 <img className="category-list_img" alt="image_category" src={general}/>
+                <img className="category-list_img" alt="image_category" src={general}/>
                 <span className="category-list_link">Général</span>
             </Link>    
             <Link to="/articles/business" >

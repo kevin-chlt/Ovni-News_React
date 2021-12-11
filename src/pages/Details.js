@@ -18,7 +18,7 @@ const Details = ({ handleRequestState, user }) => {
    }
 
    const getArticle = useCallback(() => {
-        axios.get(`https://127.0.0.1:8000/articles/details/${params.articleId}`)
+        axios.get(`https://127.0.0.1:8000/api/articles/${params.articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
