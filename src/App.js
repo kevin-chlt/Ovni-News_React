@@ -42,7 +42,7 @@ export default function App() {
               <Route path="authors/:authorId" element={<Authors handleRequestState={handleRequestState} />} />
               <Route path="registration" element={<Registration handleRequestState={handleRequestState} />} />
               <Route path="articles/details/:articleId" element={<Details handleRequestState={handleRequestState} user={user} />} />
-              <Route path="articles/:categoryId" element={<Articles handleRequestState={handleRequestState} />} />
+              <Route path="articles/:categoryId" element={<Articles handleRequestState={handleRequestState} user={user} /> } />
               <Route path="*" element={<Accueil handleActiveCategory={handleActiveCategory} />} />
           </Routes>
         </>

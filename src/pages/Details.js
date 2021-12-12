@@ -36,7 +36,7 @@ const Details = ({ handleRequestState, user }) => {
     mounted ?     
 <>
     <Main>
-        <ArticlesContent data={data} />
+        <ArticlesContent data={data} user={user} handleRequestState={handleRequestState} />
         
         <ArticlesComments data={data} handleRequestState={handleRequestState} user={user} handleComment={handleComment} />
     </Main>

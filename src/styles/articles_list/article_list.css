@@ -19,9 +19,9 @@
 .container-list:hover{font-weight: bold;}
 
 
-.container-list .article-title, .container-list .remove-link{
+.container-list .article-title{
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-family: Open-Sans, serif;
     color: #D83A56;
 }
@@ -32,8 +32,14 @@
 }
 
 .remove-link{
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #D83A56; 
     position: absolute;
     right: 10px;
+    top: 5px;
+    border: none;
+    background-color: transparent;
 }
 
 .container-list img{
@@ -41,7 +47,6 @@
     width: 140px;
     height: 100px;
 }
-
 
 .btn-retour_text{
     transition: 0.3s;
@@ -63,7 +68,7 @@
 
 /* MEDIA QUERIES */
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1050px) {
     .container-list{
         width: 100%;
         height: auto;

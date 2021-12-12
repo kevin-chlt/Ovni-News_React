@@ -1,12 +1,21 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom'; 
 import '../../styles/articles_details/articles_content.css';
+import axios from 'axios';
 
-const ArticlesContent = ({ data }) => {
+const ArticlesContent = ({ data, user, handleRequestState }) => {
+
+    const deleteArticle = (articleId) => {
+        axios.delete(`https://127.0.0.1:8000/api/articles/${articleId}`)
+        .then(() => handleRequestState('Article supprimé avec succès', 'darkgreen'))
+        .catch(() => handleRequestState('Une erreur lors de la suppression de l\'article est apparue, veuillez rééssayez.', '#D83A56'))
+    }
+
     return (
         <div className="articles-wrapper">
             <div className="article-title_container">
                 <h1> {data.title} </h1>
+                {user && user.roles.includes('ROLE_ADMIN') ? <Link to="/" className="remove-button" onClick={() => deleteArticle(data.id)}> Supprimer</Link> : null}
             </div>
             <div className="article-releaseDate_container">
                 <span>Publié le {new Date(data.publishedAt).toLocaleString('fr-FR')} </span>

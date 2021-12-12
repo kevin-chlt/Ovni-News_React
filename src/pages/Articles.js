@@ -11,7 +11,7 @@ import { useParams } from 'react-router';
 import ItemsPerPage from '../components/Articles_list/ItemsPerPage';
 
 
-const Articles = ({ handleRequestState }) => {
+const Articles = ({ handleRequestState, user }) => {
     const [data, setData] = useState([]);
     const [mounted, setMounted] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(20); 
@@ -37,6 +37,10 @@ const Articles = ({ handleRequestState }) => {
         }
     }
 
+    const handleData = (data) => {
+        setData(data)
+    }
+
     return (
     <>
     <Main>
@@ -49,7 +53,7 @@ const Articles = ({ handleRequestState }) => {
            </div>
         </FiltersWrapper>
         
-        { mounted ? <GetArticlesList data={data} itemsPerPage={parseInt(itemsPerPage)} /> : <Loading /> }
+        { mounted ? <GetArticlesList data={data} itemsPerPage={parseInt(itemsPerPage)} user={user} handleRequestState={handleRequestState} handleData={handleData} /> : <Loading /> }
 
     </Main>
     <Footer />
