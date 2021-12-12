@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 
-const Accueil = () => {
+const Accueil = ({ handleActiveCategory }) => {
     return (
         <>
 <Main>
@@ -28,35 +28,35 @@ const Accueil = () => {
     <div className="category-container">
 
         <div className="category-list_container">
-            <Link to="/articles/general" >
-                <img className="category-list_img" alt="image_category" src={general}/>
+            <Link to="/articles/general" onClick={() => handleActiveCategory('general')} >
+                <img className="category-list_img" alt="image_category" src={general} />
                 <span className="category-list_link">Général</span>
             </Link>    
-            <Link to="/articles/business" >
-                <img className="category-list_img" alt="image_category" src={business}/>
+            <Link to="/articles/business" onClick={() => handleActiveCategory('business')} >
+                <img className="category-list_img" alt="image_category" src={business }/>
                 <span className="category-list_link">Economie</span>
             </Link>    
-            <Link to="/articles/sports" >
-                <img className="category-list_img" alt="image_category" src={sports}/>
+            <Link to="/articles/sports" onClick={() => handleActiveCategory('sports')} >
+                <img className="category-list_img" alt="image_category" src={sports} />
                 <span className="category-list_link">Sport</span>
             </Link> 
         </div> 
 
         <div className="category-list_container">
-            <Link to="/articles/entertainment" >
-                <img className="category-list_img" alt="image_category" src={entertainment}/>
+            <Link to="/articles/entertainment" onClick={() => handleActiveCategory('entertainment')} >
+                <img className="category-list_img" alt="image_category" src={entertainment} />
                 <span className="category-list_link">People</span>
             </Link>    
-            <Link to="/articles/health" >
-                <img className="category-list_img" alt="image_category" src={health}/>
+            <Link to="/articles/health" onClick={() => handleActiveCategory('health')} >
+                <img className="category-list_img" alt="image_category" src={health} />
                <span className="category-list_link">Santé</span>
             </Link>    
-            <Link to="/articles/science" >
-                <img className="category-list_img" alt="image_category" src={science}/>
+            <Link to="/articles/science" onClick={() => handleActiveCategory('science')} >
+                <img className="category-list_img" alt="image_category" src={science} />
                 <span className="category-list_link">Science</span>
             </Link>    
-            <Link to="/articles/technology" >
-                <img className="category-list_img" alt="image_category" src={technology}/>
+            <Link to="/articles/technology" onClick={() => handleActiveCategory('technology')} >
+                <img className="category-list_img" alt="image_category" src={technology} />
                 <span className="category-list_link">Technologie</span>
             </Link> 
         </div>  

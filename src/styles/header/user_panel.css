@@ -7,16 +7,18 @@
 }
 
 .userName_text{
-    font-weight: bold;
-    font-size: 18px;
+    
+    font-size: 16px;
     color: #D83A56;
     margin-bottom: 3px;
+    font-family: Otomanopee One, sans-serif;
+
 }
 
 .deconnect-btn{
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 0.9rem;
+    
     color: #ffffff;
     background: #D83A56;
     padding: 5px 10px;
@@ -24,6 +26,8 @@
     border: none;
     cursor: pointer;
     transition: all .3s;
+    font-family: Otomanopee One, sans-serif;
+    ;
 }
 
 .deconnect-btn:hover{

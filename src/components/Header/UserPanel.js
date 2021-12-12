@@ -7,7 +7,7 @@ const UserPanel = ({ handleUser, user, handleRequestState }) => {
 
     const userFetch = useCallback( async () => {
         let userId = '';
-        await axios.get('https://127.0.0.1:8000/user')
+        await axios.get('https://127.0.0.1:8000/api/token_details')
         .then(res => userId = res.data.id) 
         .catch(() => handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')) 
         

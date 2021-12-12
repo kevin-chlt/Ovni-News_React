@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
+    user-select: none;
 }
 
 .site-title_container img {

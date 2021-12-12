@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf")
+}
+
+
 /* --------------------CONTAINER ARTICLE ---------- */
 .article-img_container{
     display: flex;

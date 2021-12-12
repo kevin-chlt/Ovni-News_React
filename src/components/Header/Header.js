@@ -10,10 +10,10 @@ import { getCurrentUser } from '../../services/TokenManager';
 import UserPanel from "./UserPanel";
 
 
-const Header = ({ handleRequestState, handleUser, user }) => {
+const Header = ({ handleRequestState, handleUser, user, handleActiveCategory }) => {
     const [datas, setDatas] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [activeCategory, setActiveCategory] = useState(''); 
+    
     const backgroundCategoryBtn = {
         health: '#185ADB',
         entertainment: '#B4AEE8',
@@ -42,11 +42,11 @@ const Header = ({ handleRequestState, handleUser, user }) => {
             <NavLink
                 key={category.id} 
                 className={` ${category.slug} header-nav_link`}
-                onClick={() => setActiveCategory(category.slug)}
+                onClick={() => handleActiveCategory(category.slug)}
                 style={({ isActive }) => {
                     return {
                         color: isActive ? '#fff' : '', 
-                        backgroundColor: isActive ? backgroundCategoryBtn[activeCategory] : ''
+                        backgroundColor: isActive ? backgroundCategoryBtn[category.slug] : ''
                     }
                 }}
                 to={`/articles/${category.slug}`} 
