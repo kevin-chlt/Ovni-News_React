@@ -15,11 +15,9 @@ const PublicPanel = ({ handleRequestState }) => {
         
         <Link to="/registration" className={`user-subscribe_link ${switchState ? '' : 'hide'}`}> Inscrivez-vous </Link>
 
-
         <FormLoginWrapper switchState={switchState}>
             <Login handleRequestState={handleRequestState} />
         </FormLoginWrapper>
-
 
         <div className="small-switchIcon_container">
             <img src={switcherForm} onClick={() => setSwitchState(!switchState)} className="small-connexion_icon" alt="image_form_switch" />

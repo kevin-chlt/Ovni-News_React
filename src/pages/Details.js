@@ -23,7 +23,10 @@ const Details = ({ handleRequestState, user }) => {
             setData(res.data); 
             setMounted(true); 
         })
-        .catch(() => handleRequestState('Une erreur est apparue lors de l\'envoi du message, veuillez réessayer.', '#D83A56'))
+        .catch((errors) => {
+            let error = errors.response.status === 404 ? 'Article introuvable !' : 'Une erreur est apparue lors de la récupération de l\'article !' 
+            handleRequestState(error, '#D83A56')
+        })
    }, [params.articleId, handleRequestState])
 
     useEffect(() => {
@@ -60,7 +63,6 @@ const Main = styled.main`
         flex-direction: column;
         align-items: center;
     }
-    
 `
 
 

@@ -18,7 +18,7 @@ const Articles = ({ handleRequestState, user }) => {
     let params = useParams(); 
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/articles/${params.categoryId}`)
+        axios.get(`https://127.0.0.1:8000/articles/category/${params.categoryId}`)
         .then(res => {
             setData(res.data);
             setMounted(true);

@@ -1,15 +1,30 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import { Link } from 'react-router-dom'; 
 import '../../styles/articles_details/articles_content.css';
 import axios from 'axios';
+import { useState } from 'react/cjs/react.development';
 
 const ArticlesContent = ({ data, user, handleRequestState }) => {
+    const [ids, setIds] = useState(''); 
 
     const deleteArticle = (articleId) => {
         axios.delete(`https://127.0.0.1:8000/api/articles/${articleId}`)
         .then(() => handleRequestState('Article supprimé avec succès', 'darkgreen'))
         .catch(() => handleRequestState('Une erreur lors de la suppression de l\'article est apparue, veuillez rééssayez.', '#D83A56'))
     }
+    
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/articles/ids')
+        .then (res => setIds(res.data))
+        .catch(() => handleRequestState('Une erreur est survenu lors du chargement. Veuillez réessayez plus tard.', '#D83A56'))
+    }, [handleRequestState])
+    
+    const setLinkIDs = () => {
+       console.log(ids[444])
+    }
+
+    setLinkIDs()
+    
 
     return (
         <div className="articles-wrapper">
