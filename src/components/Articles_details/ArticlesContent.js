@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { Link } from 'react-router-dom'; 
-import '../../styles/articles_details/articles_content.css';
 import axios from 'axios';
-import { useState } from 'react/cjs/react.development';
+import '../../styles/articles_details/articles_content.css';
+
 
 const ArticlesContent = ({ data, user, handleRequestState }) => {
-    const [ids, setIds] = useState(''); 
+    const [ids, setIds] = useState('');
 
     const deleteArticle = (articleId) => {
         axios.delete(`https://127.0.0.1:8000/api/articles/${articleId}`)
@@ -15,16 +15,39 @@ const ArticlesContent = ({ data, user, handleRequestState }) => {
     
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/articles/ids')
-        .then (res => setIds(res.data))
+        .then (res => {
+            let idsMap = res.data.map(obj => obj.id)
+            setIds(idsMap);
+        })
         .catch(() => handleRequestState('Une erreur est survenu lors du chargement. Veuillez réessayez plus tard.', '#D83A56'))
     }, [handleRequestState])
     
-    const setLinkIDs = () => {
-       console.log(ids[444])
-    }
 
-    setLinkIDs()
-    
+    const setIdInBtn = (id, operande) => {
+        if (ids.includes(id)) {
+            return id;
+        }
+
+        if(operande === 'more') {
+            if (id > ids.at(-1)) {
+                return ids.at(0);
+            }
+        } 
+
+        if (operande === 'less') {
+            console.log(ids.at(0))
+            if (id < ids.at(0)) {
+                return ids.at(-1);
+            }
+        }
+        
+        for(let i = 0; i < ids.length; i++) {
+            operande === 'more' ? id+=1 : id -=1
+            if(ids.includes(id)) {
+                return id
+            }
+        }
+    }
 
     return (
         <div className="articles-wrapper">
@@ -45,10 +68,10 @@ const ArticlesContent = ({ data, user, handleRequestState }) => {
                 <Link to={`/articles/${data.category[0].slug}`}>
                     Retour
                 </Link>
-                <Link to={`/articles/details/${data.id -1}`} >
+                <Link to={`/articles/details/${setIdInBtn(data.id -1, 'less')}`} >
                     Precedent
                 </Link>
-                <Link to={`/articles/details/${data.id +1}`} >
+                <Link to={`/articles/details/${setIdInBtn(data.id +1, 'more')} `} >
                     Suivant
                 </Link>
                 <a href={data.externalLink} target="_blank" rel="noreferrer noopener">
