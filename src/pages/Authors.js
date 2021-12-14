@@ -17,7 +17,7 @@ const Authors = ({ handleRequestState }) => {
 
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/authors/${params.authorId}`)
+        axios.get(`/authors/${params.authorId}`)
         .then(res => {
             setData(res.data); 
             setMounted(true); 

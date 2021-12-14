@@ -8,10 +8,13 @@ const FiltersByAuthors = ({ handleRequestState }) => {
     let navigation = useNavigate();
 
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/api/authors/`)
+        axios.get(`/api/authors/`)
         .then((res) => {
             setAuthorsList(res.data);
-        }).catch(() => handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56'))
+        }).catch(() => {
+            localStorage.clear();
+            handleRequestState('Une erreur est apparue, veuillez vous reconnectez et rafraichir la page.', '#D83A56')
+        })
     }, [handleRequestState])
     
     const handleClickAuthor = (key) => {

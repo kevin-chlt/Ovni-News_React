@@ -18,12 +18,13 @@ const Details = ({ handleRequestState, user }) => {
    }
 
    const getArticle = useCallback(() => {
-        axios.get(`https://127.0.0.1:8000/api/articles/${params.articleId}`)
+        axios.get(`/api/articles/${params.articleId}`)
         .then(res =>{
             setData(res.data); 
             setMounted(true); 
         })
         .catch((errors) => {
+            localStorage.clear();
             let error = errors.response.status === 404 ? 'Article introuvable !' : 'Une erreur est apparue lors de la récupération de l\'article !' 
             handleRequestState(error, '#D83A56')
         })

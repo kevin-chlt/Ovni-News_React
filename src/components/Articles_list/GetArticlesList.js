@@ -11,7 +11,7 @@ const GetArticlesList = ({ data, itemsPerPage, user, handleRequestState, handleD
     }, [])
 
     const deleteArticle = (articleId) => {
-        axios.delete(`https://127.0.0.1:8000/api/articles/${articleId}`)
+        axios.delete(`/api/articles/${articleId}`)
         .then(() => {
            handleRequestState('Article supprimé avec succès', 'darkgreen'); 
            let newData = data.filter(data => data.id !== articleId)

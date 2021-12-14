@@ -8,18 +8,21 @@ const ArticlesContent = ({ data, user, handleRequestState }) => {
     const [ids, setIds] = useState('');
 
     const deleteArticle = (articleId) => {
-        axios.delete(`https://127.0.0.1:8000/api/articles/${articleId}`)
+        axios.delete(`/api/articles/${articleId}`)
         .then(() => handleRequestState('Article supprimé avec succès', 'darkgreen'))
         .catch(() => handleRequestState('Une erreur lors de la suppression de l\'article est apparue, veuillez rééssayez.', '#D83A56'))
     }
     
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/articles/ids')
+        axios.get('/articles/ids')
         .then (res => {
             let idsMap = res.data.map(obj => obj.id)
             setIds(idsMap);
         })
-        .catch(() => handleRequestState('Une erreur est survenu lors du chargement. Veuillez réessayez plus tard.', '#D83A56'))
+        .catch(() => {
+            localStorage.clear();
+            handleRequestState('Une erreur est apparue, veuillez vous reconnectez et rafraichir la page.', '#D83A56')
+        })
     }, [handleRequestState])
     
 
@@ -35,7 +38,6 @@ const ArticlesContent = ({ data, user, handleRequestState }) => {
         } 
 
         if (operande === 'less') {
-            console.log(ids.at(0))
             if (id < ids.at(0)) {
                 return ids.at(-1);
             }

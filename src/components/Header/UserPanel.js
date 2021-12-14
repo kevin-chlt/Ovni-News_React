@@ -7,13 +7,19 @@ const UserPanel = ({ handleUser, user, handleRequestState }) => {
 
     const userFetch = useCallback( async () => {
         let userId = '';
-        await axios.get('https://127.0.0.1:8000/api/token_details')
+        await axios.get('/api/token_details')
         .then(res => userId = res.data.id) 
-        .catch(() => handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')) 
+        .catch(() => {
+            localStorage.clear();
+            handleRequestState('Une erreur est apparue, veuillez rafraichir la page.', '#D83A56')
+        })
         
-        await axios.get(`https://127.0.0.1:8000/api/users/${userId}`)
+        await axios.get(`/api/users/${userId}`)
         .then(res => handleUser(res.data))
-        .catch(() => handleRequestState('Une erreur est apparue, veuillez vous reconnectez', '#D83A56')) 
+        .catch(() => {
+            localStorage.clear();
+            handleRequestState('Une erreur est apparue, veuillez vous reconnectez et rafraichir la page.', '#D83A56')
+        }) 
     },[handleUser, handleRequestState])
 
     useEffect(() => {

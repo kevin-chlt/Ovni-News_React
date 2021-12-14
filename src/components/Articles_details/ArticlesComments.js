@@ -18,7 +18,7 @@ const ArticlesComments = ({ data, handleRequestState, user, handleComment }) => 
           return handleRequestState('Veuillez vous connecter pour écrire un message', '#D83A56')
         }
 
-        axios.post('https://127.0.0.1:8000/api/comments', {...newComment})
+        axios.post('/api/comments', {...newComment})
         .then(res => {
            if (res.status >= 200 && res.status < 300 ) {
                 handleRequestState('Message envoyé avec succès', 'darkgreen');

@@ -85,7 +85,7 @@ const Registration = ({ handleRequestState }) => {
 
     const insertUserInDb = useCallback( () => {
         const data = Object.assign({}, ...user);
-        axios.post('https://127.0.0.1:8000/registration', {data})
+        axios.post('/registration', {data})
         .then(res =>{
             handleRequestState(`Bienvenue ${data.firstname}`, 'darkgreen');
             localStorage.setItem('token', res.data.token)
