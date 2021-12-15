@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+## Projet Ovni news 
+#### Lien du projet: http://ovni-news-reactapp.herokuapp.com/  ** Site accesible uniquement en HTTP ** 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+--------------------------------------------------------
+#### API Symfony 5.3 / Librairie Javascript React / Base de données relationnelle MariaDB
 
-## Available Scripts
+### Résumé & Fonctionnalités
 
-In the project directory, you can run:
+Projet de réseaux social autour de l'actualité avec un partage d'articles provenant de divers journaux couvrant plusieurs thèmes avec un systeme de commentaire pour permettre l'interaction entre utilisateurs enregistré sur la plateforme.
 
-### `npm start`
+L'utilisateur arrivant sur la page d'accueil aura la possibilité de se connecter et de choisir dans quel catégorie d'information il veux naviguer.
+Les appels à l'API se font à chaque fois qu'un utilisateur clique sur la categorie de son choix', la categorie est placé dans l'url d'appel à l'API.
+Une fois les articles récupéré de l'API, l'application traitera les données en filtrant les données comportant obligatoire titre, image et url de la source extérieur, puis verifiera si les données sont déjà enregistré ou non dans la base de données et les ajoutes dans celle-ci dans le cas où elle ne serait pas enregistré.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+L'utilisateur à accès à un filtre par auteur et par nombre d'articles retournés dans la liste.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Une fois l'article choisi, une page de détai de celui-ci s'affichera, et un espace de commentaire permettant aux utilisateur de réagir à l'info.
 
-### `npm test`
+Le projet est responsive est adapté à tous les supports avec un dropdown fait maison en JS/CSS pour le menu des catégories.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Deploiement en local 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Cloner les fichier sur votre ordinateur avec git `https://github.com/kevin-chlt/Ovni-News_React.git`.
+- Installer les dépendances de l'application avec `npm install`.   
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Le lien de l'API défini dans le fichier `services/axiosInterceptor.js` et pointe sur la version en ligne de l'API.
+Vous pouvez maintenant lancer votre serveur local et commencer à naviguer sur le projet.
