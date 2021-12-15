@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://127.0.0.1:8000';
+axios.defaults.baseURL = 'https://api-ovni-news.herokuapp.com';
 
 axios.interceptors.request.use(function (config) {
     if(localStorage.getItem('token')) {
